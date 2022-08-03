@@ -1,0 +1,14 @@
+{
+  "Attack_Minstrel": {
+    "NAME": "强力射击",
+    "DESCRIPTION": "造成 !D! 点伤害"
+  },
+  "Defense_Minstrel": {
+    "NAME": "闪避",
+    "DESCRIPTION": "造成 !B! 点格挡"
+  },
+  "Quick_Minstrel": {
+    "NAME": "连珠箭",
+    "DESCRIPTION": "对全体敌人造成 !D! 点伤害"
+  }
+}

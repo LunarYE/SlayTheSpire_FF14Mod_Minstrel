@@ -1,0 +1,13 @@
+{
+  "modid": "Chang_Demo",
+  "name": "Chang_Demo（xiewen）",
+  "author_list": [
+    "谢文"
+  ],
+  "description": "Adds Chang_Demo（xiewen） from Touhou Project as a new playable character.",
+  "dependencies": [
+    "basemod"
+  ],
+  "version": "0.0.1",
+  "sts_version": "08-15-2021"
+}
