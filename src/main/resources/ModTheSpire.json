@@ -1,10 +1,10 @@
 {
-  "modid": "Chang_Demo",
-  "name": "Chang_Demo（xiewen）",
+  "modid": "FF14Mod_Minstrel",
+  "name": "FF14Mod_吟游诗人",
   "author_list": [
-    "谢文"
+    "月蚀"
   ],
-  "description": "Adds Chang_Demo（xiewen） from Touhou Project as a new playable character.",
+  "description": "Add Minstrel from FF14 Project as a new playable character.",
   "dependencies": [
     "basemod"
   ],

@@ -11,14 +11,34 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 
+// 继承CustomRelic
 public class MinstrelBegin extends CustomRelic {
+    /**
+     * 遗物id
+     */
     public static final String ID = "MinstrelBegin";
+    /**
+     * 图片路径
+     */
     private static final String IMG = "img/relics_Seles/cLanguageProgramBegin.png";
+    /**
+     * 图片底片
+     */
     private static final String IMG_OTL = "img/relics_Seles/outline/cLanguageProgramBegin.png";
+    /**
+     * 遗物类型
+     */
+    private static final RelicTier RELIC_TIER = RelicTier.STARTER;
+    /**
+     * 点击音效
+     */
+    private static final LandingSound LANDING_SOUND = LandingSound.FLAT;
 
-    //调用父类的构造方法，传参为super(遗物ID,遗物全图，遗物白底图，遗物稀有度，获得遗物时的音效)
+    /**
+     * 调用父类的构造方法，传参为super(遗物ID,遗物全图，遗物白底图，遗物稀有度，获得遗物时的音效)
+     */
     public MinstrelBegin() {
-        super(ID, ImageMaster.loadImage(IMG), ImageMaster.loadImage(IMG_OTL), RelicTier.STARTER, LandingSound.CLINK);
+        super(ID, ImageMaster.loadImage(IMG), ImageMaster.loadImage(IMG_OTL), RELIC_TIER, LANDING_SOUND);
     }
 
     @Override
@@ -36,8 +56,8 @@ public class MinstrelBegin extends CustomRelic {
                 //如果是2的倍数，counter=0和获得5点格挡
                 this.counter = 0;
                 flash();
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new RelicAboveCreatureAction((AbstractCreature)AbstractDungeon.player, (AbstractRelic)this));
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new GainBlockAction((AbstractCreature)AbstractDungeon.player, (AbstractCreature)AbstractDungeon.player, 3));
+                AbstractDungeon.actionManager.addToBottom((AbstractGameAction) new RelicAboveCreatureAction((AbstractCreature) AbstractDungeon.player, (AbstractRelic) this));
+                AbstractDungeon.actionManager.addToBottom((AbstractGameAction) new GainBlockAction((AbstractCreature) AbstractDungeon.player, (AbstractCreature) AbstractDungeon.player, 3));
             }
         }
     }
@@ -48,6 +68,9 @@ public class MinstrelBegin extends CustomRelic {
         this.counter = -1;
     }
 
+    /**
+     * 获取遗物描述，但原版游戏只在初始化和获取遗物时调用，故该方法等于初始描述
+     */
     @Override
     public String getUpdatedDescription() {
         return this.DESCRIPTIONS[0];
@@ -55,6 +78,6 @@ public class MinstrelBegin extends CustomRelic {
 
     @Override
     public AbstractRelic makeCopy() {
-        return (AbstractRelic)new MinstrelBegin();
+        return new MinstrelBegin();
     }
 }

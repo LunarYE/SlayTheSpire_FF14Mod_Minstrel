@@ -2,7 +2,6 @@ package cards;
 
 import basemod.abstracts.CustomCard;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.actions.common.DamageAllEnemiesAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
@@ -13,7 +12,7 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import pathes.AbstractCardEnum;
 
-public class Quick_Minstrel extends CustomCard {
+public class Shadowbite_Minstrel extends CustomCard {
     /**
      * 卡牌贴图路径
      */
@@ -33,7 +32,7 @@ public class Quick_Minstrel extends CustomCard {
     /**
      * 获取类名作为卡牌id
      */
-    public static final String ID = "Quick_Minstrel";
+    public static final String ID = "Shadowbite_Minstrel";
 //    public static final String ID = Attack_Minstrel.class.getSimpleName();
     /**
      * 从.json文件中提取键名为卡牌id的信息
@@ -50,24 +49,24 @@ public class Quick_Minstrel extends CustomCard {
     /**
      * 定义卡牌类型
      */
-    public static final CardType TYPE = CardType.ATTACK;
+    public static final AbstractCard.CardType TYPE = AbstractCard.CardType.ATTACK;
     /**
      * 定义卡牌颜色
      */
-    private static final CardColor COLOR = AbstractCardEnum.MINSTREL_COLOR;
+    private static final AbstractCard.CardColor COLOR = AbstractCardEnum.MINSTREL_COLOR;
     /**
      * 定义卡牌稀有度
      */
-    private static final CardRarity RARITY = CardRarity.BASIC;
+    private static final AbstractCard.CardRarity RARITY = AbstractCard.CardRarity.BASIC;
     /**
      * 定义卡牌指向对象
      */
-    private static final CardTarget TARGET = CardTarget.ALL_ENEMY;
+    private static final AbstractCard.CardTarget TARGET = AbstractCard.CardTarget.ALL_ENEMY;
 
-    public Quick_Minstrel() {
+    public Shadowbite_Minstrel() {
         //调用父类的构造方法，传参为super(卡牌ID,卡牌名称，能量花费，卡牌描述，卡牌类型，卡牌颜色，卡牌稀有度，卡牌目标)
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
-//        this.exhaust = true; //消耗
+        this.exhaust = true; //消耗
 //        this.isEthereal = true;
         //添加攻击的伤害
         this.baseDamage = NUMERICAL;
@@ -87,7 +86,7 @@ public class Quick_Minstrel extends CustomCard {
     @Override
     public AbstractCard makeCopy() {
         //复制卡牌时触发
-        return new Quick_Minstrel();
+        return new Shadowbite_Minstrel();
     }
 
     @Override
@@ -96,7 +95,7 @@ public class Quick_Minstrel extends CustomCard {
         if (!this.upgraded) {
             //更改名字和提高3点伤害
             upgradeName();
-            this.name = "百首龙牙箭";
+            this.name = "影逝箭";
             upgradeDamage(UPGRADE_NUMERICAL);
         }
     }

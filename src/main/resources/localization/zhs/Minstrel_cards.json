@@ -10,5 +10,9 @@
   "Quick_Minstrel": {
     "NAME": "连珠箭",
     "DESCRIPTION": "对全体敌人造成 !D! 点伤害"
+  },
+  "Shadowbite_Minstrel": {
+    "NAME": "暗影射击",
+    "DESCRIPTION": "对全体敌人造成 !D! 点伤害。 NL 消耗"
   }
 }
