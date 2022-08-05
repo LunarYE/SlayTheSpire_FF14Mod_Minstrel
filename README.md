@@ -1,5 +1,7 @@
 # SlayTheSpire_FF14Mod_Minstrel
 
+### 此mod尚未完成！目前希望找到志同道合的小伙伴一起开发mod
+
 #### 介绍
 杀戮尖塔-ff14Mod-吟游诗人
 增加FF14的远敏职业-吟游诗人角色
