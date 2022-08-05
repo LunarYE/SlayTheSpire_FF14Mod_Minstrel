@@ -2,10 +2,7 @@ package demoMod;
 
 import basemod.BaseMod;
 import basemod.interfaces.*;
-import cards.Attack_Minstrel;
-import cards.Defense_Minstrel;
-import cards.Quick_Minstrel;
-import cards.Shadowbite_Minstrel;
+import cards.minstrel.*;
 import characters.Minstrel;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -34,7 +31,7 @@ import java.util.Iterator;
 
 @SpireInitializer
 public class MinstrelMod implements RelicGetSubscriber, PostPowerApplySubscriber, PostExhaustSubscriber, PostBattleSubscriber, PostDungeonInitializeSubscriber, EditCharactersSubscriber, PostInitializeSubscriber, EditRelicsSubscriber, EditCardsSubscriber, EditStringsSubscriber, OnCardUseSubscriber, EditKeywordsSubscriber, OnPowersModifiedSubscriber, PostDrawSubscriber, PostEnergyRechargeSubscriber {
-    private static final String MOD_BADGE = "img/UI_Seles/badge.png";
+    private static final String MOD_BADGE = "img/minstrel/UI/badge.png";
     //攻击、技能、能力牌的背景图片(512)
     private static final String ATTACK_CC = "img/512/bg_attack_SELES_s.png";
     private static final String SKILL_CC = "img/512/bg_skill_SELES_s.png";
@@ -45,10 +42,10 @@ public class MinstrelMod implements RelicGetSubscriber, PostPowerApplySubscriber
     private static final String SKILL_CC_PORTRAIT = "img/1024/bg_skill_SELES.png";
     private static final String POWER_CC_PORTRAIT = "img/1024/bg_power_SELES.png";
     private static final String ENERGY_ORB_CC_PORTRAIT = "img/1024/SELESOrb.png";
-    public static final String CARD_ENERGY_ORB = "img/UI_Seles/energyOrb.png";
+    public static final String CARD_ENERGY_ORB = "img/minstrel/UI/energyOrb.png";
     //选英雄界面的角色图标、选英雄时的背景图片
-    private static final String MY_CHARACTER_BUTTON = "img/charSelect/SelesButton.png";
-    private static final String MARISA_PORTRAIT = "img/charSelect/LunarPortrait.png";
+    private static final String MY_CHARACTER_BUTTON = "img/minstrel/char_select/SelesButton.png";
+    private static final String MARISA_PORTRAIT = "img/minstrel/char_select/LunarPortrait.png";
     public static final Color SILVER = CardHelper.getColor(200, 200, 200);
     private ArrayList<AbstractCard> cardsToAdd = new ArrayList<>();
     public static ArrayList<AbstractCard> recyclecards = new ArrayList<>();
@@ -149,6 +146,7 @@ public class MinstrelMod implements RelicGetSubscriber, PostPowerApplySubscriber
         this.cardsToAdd.add(new Defense_Minstrel());
         this.cardsToAdd.add(new Quick_Minstrel());
         this.cardsToAdd.add(new Shadowbite_Minstrel());
+        this.cardsToAdd.add(new Straight_Minstrel());
     }
 
     //添加一度

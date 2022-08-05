@@ -22,13 +22,13 @@ public class Minstrel extends CustomPlayer {
     //初始能量
     private static final int ENERGY_PER_TURN = 3;
     //以下图片依次作用为[篝火休息处的角色背影2，篝火休息处的角色背影1，角色死亡后倒下的图片，角色平常站立时的图片]
-    private static final String SELES_SHOULDER_2 = "img/char_Seles/shoulder2.png";
-    private static final String SELES_SHOULDER_1 = "img/char_Seles/shoulder1.png";
-    private static final String SELES_CORPSE = "img/char_Seles/fallen.png";
-    private static final String SELES_STAND = "img/char_Seles/Seles.png";
+    private static final String SELES_SHOULDER_2 = "img/minstrel/char/shoulder2.png";
+    private static final String SELES_SHOULDER_1 = "img/minstrel/char/shoulder1.png";
+    private static final String SELES_CORPSE = "img/minstrel/char/fallen.png";
+    private static final String SELES_STAND = "img/minstrel/char/Seles.png";
     //各种素材，不是很懂
-    private static final String[] ORB_TEXTURES = new String[]{"img/UI_Seles/EPanel/layer5.png", "img/UI_Seles/EPanel/layer4.png", "img/UI_Seles/EPanel/layer3.png", "img/UI_Seles/EPanel/layer2.png", "img/UI_Seles/EPanel/layer1.png", "img/UI_Seles/EPanel/layer0.png", "img/UI_Seles/EPanel/layer5d.png", "img/UI_Seles/EPanel/layer4d.png", "img/UI_Seles/EPanel/layer3d.png", "img/UI_Seles/EPanel/layer2d.png", "img/UI_Seles/EPanel/layer1d.png"};
-    private static final String ORB_VFX = "img/UI_Seles/energyBlueVFX.png";
+    private static final String[] ORB_TEXTURES = new String[]{"img/minstrel/UI/EPanel/layer5.png", "img/minstrel/UI/EPanel/layer4.png", "img/minstrel/UI/EPanel/layer3.png", "img/minstrel/UI/EPanel/layer2.png", "img/minstrel/UI/EPanel/layer1.png", "img/minstrel/UI/EPanel/layer0.png", "img/minstrel/UI/EPanel/layer5d.png", "img/minstrel/UI/EPanel/layer4d.png", "img/minstrel/UI/EPanel/layer3d.png", "img/minstrel/UI/EPanel/layer2d.png", "img/minstrel/UI/EPanel/layer1d.png"};
+    private static final String ORB_VFX = "img/minstrel/UI/energyBlueVFX.png";
     private static final float[] LAYER_SPEED = new float[]{-40.0F, -32.0F, 20.0F, -20.0F, 0.0F, -10.0F, -8.0F, 5.0F, -5.0F, 0.0F};
     //初始生命，最大生命，初始金币,初始的充能球栏位（机器人）,最后一个应该是进阶14时的最大生命值下降
     private static final int STARTING_HP = 75;

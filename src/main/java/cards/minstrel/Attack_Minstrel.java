@@ -1,4 +1,4 @@
-package cards;
+package cards.minstrel;
 
 import basemod.abstracts.CustomCard;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
@@ -16,7 +16,7 @@ public class Attack_Minstrel extends CustomCard {
     /**
      * 卡牌贴图路径
      */
-    public static final String IMG_PATH = "img/cards_Seles/Strike.png";
+    public static final String IMG_PATH = "img/minstrel/cards/test.png";
     /**
      * 卡牌基础费用
      */

@@ -1,8 +1,10 @@
-package cards;
+package cards.minstrel;
 
 import basemod.abstracts.CustomCard;
-import com.megacrit.cardcrawl.actions.common.GainBlockAction;
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.common.DamageAllEnemiesAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -10,11 +12,11 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import pathes.AbstractCardEnum;
 
-public class Defense_Minstrel extends CustomCard {
+public class Shadowbite_Minstrel extends CustomCard {
     /**
      * 卡牌贴图路径
      */
-    public static final String IMG_PATH = "img/cards_Seles/Defend.png";
+    public static final String IMG_PATH = "img/minstrel/cards/test.png";
     /**
      * 卡牌基础费用
      */
@@ -26,11 +28,12 @@ public class Defense_Minstrel extends CustomCard {
     /**
      * 升级后提高的数值
      */
-    private static final int UPGRADE_NUMERICAL = 5;
+    private static final int UPGRADE_NUMERICAL = 3;
     /**
      * 获取类名作为卡牌id
      */
-    public static final String ID = "Defense_Minstrel";
+    public static final String ID = "Shadowbite_Minstrel";
+//    public static final String ID = Attack_Minstrel.class.getSimpleName();
     /**
      * 从.json文件中提取键名为卡牌id的信息
      */
@@ -46,49 +49,54 @@ public class Defense_Minstrel extends CustomCard {
     /**
      * 定义卡牌类型
      */
-    public static final CardType TYPE = CardType.SKILL;
+    public static final AbstractCard.CardType TYPE = AbstractCard.CardType.ATTACK;
     /**
      * 定义卡牌颜色
      */
-    private static final CardColor COLOR = AbstractCardEnum.MINSTREL_COLOR;
+    private static final AbstractCard.CardColor COLOR = AbstractCardEnum.MINSTREL_COLOR;
     /**
      * 定义卡牌稀有度
      */
-    private static final CardRarity RARITY = CardRarity.BASIC;
+    private static final AbstractCard.CardRarity RARITY = AbstractCard.CardRarity.BASIC;
     /**
      * 定义卡牌指向对象
      */
-    private static final CardTarget TARGET = CardTarget.SELF;
+    private static final AbstractCard.CardTarget TARGET = AbstractCard.CardTarget.ALL_ENEMY;
 
-
-    public Defense_Minstrel() {
+    public Shadowbite_Minstrel() {
         //调用父类的构造方法，传参为super(卡牌ID,卡牌名称，能量花费，卡牌描述，卡牌类型，卡牌颜色，卡牌稀有度，卡牌目标)
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
-        //添加基础防御标签和将格挡设为5
-        this.tags.add(CardTags.STARTER_DEFEND);
-        this.baseBlock = NUMERICAL;
+        this.exhaust = true; //消耗
+//        this.isEthereal = true;
+        //添加攻击的伤害
+        this.baseDamage = NUMERICAL;
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         //使用卡牌时触发的动作
-        AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, p, this.block));
+        AbstractDungeon.actionManager.addToBottom
+                (new DamageAllEnemiesAction
+                        (p, this.multiDamage, DamageInfo.DamageType.NORMAL, AbstractGameAction.AttackEffect.SLASH_HEAVY));
+//        AbstractDungeon.actionManager.addToBottom(
+//                new DamageAction(m, new DamageInfo(p, this.damage, this.damageTypeForTurn), AbstractGameAction.AttackEffect.SLASH_HORIZONTAL));
+
     }
 
     @Override
     public AbstractCard makeCopy() {
         //复制卡牌时触发
-        return new Defense_Minstrel();
+        return new Shadowbite_Minstrel();
     }
 
     @Override
     public void upgrade() {
         //卡牌升级后的效果
         if (!this.upgraded) {
-            //更改名字和提高3点格挡
+            //更改名字和提高3点伤害
             upgradeName();
-            upgradeBlock(UPGRADE_NUMERICAL);
+            this.name = "影逝箭";
+            upgradeDamage(UPGRADE_NUMERICAL);
         }
     }
-
 }

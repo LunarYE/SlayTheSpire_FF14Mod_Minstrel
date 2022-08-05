@@ -20,11 +20,11 @@ public class MinstrelBegin extends CustomRelic {
     /**
      * 图片路径
      */
-    private static final String IMG = "img/relics_Seles/cLanguageProgramBegin.png";
+    private static final String IMG = "img/minstrel/relics/test.png";
     /**
      * 图片底片
      */
-    private static final String IMG_OTL = "img/relics_Seles/outline/cLanguageProgramBegin.png";
+    private static final String IMG_OTL = "img/minstrel/relics/outline/cLanguageProgramBegin.png";
     /**
      * 遗物类型
      */
