@@ -142,11 +142,12 @@ public class MinstrelMod implements RelicGetSubscriber, PostPowerApplySubscriber
     private void loadCardsToAdd() {
         //将自定义的卡牌添加到这里
         this.cardsToAdd.clear();
-        this.cardsToAdd.add(new Attack_Minstrel());
-        this.cardsToAdd.add(new Defense_Minstrel());
-        this.cardsToAdd.add(new Quick_Minstrel());
-        this.cardsToAdd.add(new Shadowbite_Minstrel());
-        this.cardsToAdd.add(new Straight_Minstrel());
+        this.cardsToAdd.add(new Attack());
+        this.cardsToAdd.add(new Defense());
+        this.cardsToAdd.add(new Quick());
+        this.cardsToAdd.add(new ShadowBite());
+        this.cardsToAdd.add(new Straight());
+        this.cardsToAdd.add(new DeathRain());
     }
 
     //添加一度

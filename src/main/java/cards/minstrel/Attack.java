@@ -10,13 +10,18 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import helpers.ModHelper;
 import pathes.AbstractCardEnum;
 
-public class Attack_Minstrel extends CustomCard {
+public class Attack extends CustomCard {
+    /**
+     * 获取类名作为卡牌id
+     */
+    public static final String ID = ModHelper.MakePath(Attack.class.getSimpleName());
     /**
      * 卡牌贴图路径
      */
-    public static final String IMG_PATH = "img/minstrel/cards/test.png";
+    private static final String IMG_PATH = "img/minstrel/cards/test.png";
     /**
      * 卡牌基础费用
      */
@@ -30,25 +35,21 @@ public class Attack_Minstrel extends CustomCard {
      */
     private static final int UPGRADE_NUMERICAL = 3;
     /**
-     * 获取类名作为卡牌id
-     */
-    public static final String ID = "Attack_Minstrel";
-    /**
      * 从.json文件中提取键名为卡牌id的信息
      */
     private static final CardStrings CARD_STRINGS = CardCrawlGame.languagePack.getCardStrings(ID);
     /**
      * 从.json文件中获取类名为键名的卡牌名称
      */
-    public static final String NAME = CARD_STRINGS.NAME;
+    private static final String NAME = CARD_STRINGS.NAME;
     /**
      * 从.json文件中获取类名为键名的卡牌效果
      */
-    public static final String DESCRIPTION = CARD_STRINGS.DESCRIPTION;
+    private static final String DESCRIPTION = CARD_STRINGS.DESCRIPTION;
     /**
      * 定义卡牌类型
      */
-    public static final CardType TYPE = CardType.ATTACK;
+    private static final CardType TYPE = CardType.ATTACK;
     /**
      * 定义卡牌颜色
      */
@@ -62,7 +63,7 @@ public class Attack_Minstrel extends CustomCard {
      */
     private static final CardTarget TARGET = CardTarget.ENEMY;
 
-    public Attack_Minstrel() {
+    public Attack() {
         //调用父类的构造方法，传参为super(卡牌ID,卡牌名称，能量花费，卡牌描述，卡牌类型，卡牌颜色，卡牌稀有度，卡牌目标)
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
         //添加基础攻击标签
@@ -82,7 +83,7 @@ public class Attack_Minstrel extends CustomCard {
     @Override
     public AbstractCard makeCopy() {
         //复制卡牌时触发
-        return new Attack_Minstrel();
+        return new Attack();
     }
 
     @Override

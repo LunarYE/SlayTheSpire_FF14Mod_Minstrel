@@ -54,13 +54,13 @@ public class Minstrel extends CustomPlayer {
     public ArrayList<String> getStartingDeck() {
         //添加初始卡组
         ArrayList<String> retVal = new ArrayList<>();
-        retVal.add("Attack_Minstrel");
-        retVal.add("Attack_Minstrel");
-        retVal.add("Attack_Minstrel");
-        retVal.add("Defense_Minstrel");
-        retVal.add("Defense_Minstrel");
-        retVal.add("Defense_Minstrel");
-        retVal.add("Defense_Minstrel");
+        retVal.add("Minstrel:Attack");
+        retVal.add("Minstrel:Attack");
+        retVal.add("Minstrel:Attack");
+        retVal.add("Minstrel:Defense");
+        retVal.add("Minstrel:Defense");
+        retVal.add("Minstrel:Defense");
+        retVal.add("Minstrel:Defense");
         return retVal;
     }
 

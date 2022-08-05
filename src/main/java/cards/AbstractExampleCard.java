@@ -67,27 +67,8 @@ public class AbstractExampleCard extends CustomCard implements SpawnModification
 //        return String.format("img/cards/test_"+type+".png");
 //    }
 
-    //以下三个方法可以快速设置伤害格挡特殊值的基础数值
-    protected void setupDamage(int amt) {
-        this.baseDamage = amt;
-        this.damage = amt;
-    }
 
-    protected void setupBlock(int amt) {
-        this.baseBlock = amt;
-        this.block = amt;
-    }
 
-    protected void setupMagicNumber(int amt) {
-        this.baseMagicNumber = amt;
-        this.magicNumber = amt;
-    }
-
-    // 将描述设置为升级描述并更新描述
-    protected void upgradeDescription(CardStrings cardStrings) {
-        this.rawDescription = cardStrings.UPGRADE_DESCRIPTION;
-        this.initializeDescription();
-    }
 
     // 简化伤害代码
     public void damageToEnemy(AbstractMonster m, AbstractGameAction.AttackEffect effect) {
