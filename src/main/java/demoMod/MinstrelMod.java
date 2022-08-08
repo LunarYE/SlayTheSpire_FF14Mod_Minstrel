@@ -101,20 +101,20 @@ public class MinstrelMod implements PostInitializeSubscriber, EditCharactersSubs
             BaseMod.addCard(card);
             UnlockTracker.unlockCard(card.cardID);
 
-            if (card instanceof cards.AbstractShionAnastasiaCard) {
+            if (card instanceof cards.AbstractMinstrelAnastasiaCard) {
                 an_Cards.add(card);
             }
 
-            if (card instanceof cards.AbstractShionAnastasiaCard) {
+            if (card instanceof cards.AbstractMinstrelAnastasiaCard) {
                 ku_Cards.add(card);
             }
-            if (card instanceof cards.AbstractShionAnastasiaCard) {
+            if (card instanceof cards.AbstractMinstrelAnastasiaCard) {
                 li_Cards.add(card);
             }
-            if (card instanceof cards.AbstractShionAnastasiaCard) {
+            if (card instanceof cards.AbstractMinstrelAnastasiaCard) {
                 mi_Cards.add(card);
             }
-            if (card instanceof cards.AbstractShionAnastasiaCard) {
+            if (card instanceof cards.AbstractMinstrelAnastasiaCard) {
                 shi_Cards.add(card);
             }
 

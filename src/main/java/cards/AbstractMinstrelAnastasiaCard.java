@@ -3,14 +3,14 @@
 /*    */
 
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import pathes.CardTagsEnum;
+import pathes.AbstractCardTagsEnum;
 
 /*    */
-/*    */ public abstract class AbstractShionAnastasiaCard
-/*    */   extends AbstractVUPShionCard {
-/*    */   public AbstractShionAnastasiaCard(String id, String img, int cost, AbstractCard.CardType type, AbstractCard.CardRarity rarity, AbstractCard.CardTarget target) {
+/*    */ public abstract class AbstractMinstrelAnastasiaCard
+/*    */   extends AbstractMinstrelCard {
+/*    */   public AbstractMinstrelAnastasiaCard(String id, String img, int cost, AbstractCard.CardType type, AbstractCard.CardRarity rarity, AbstractCard.CardTarget target) {
 /*  9 */     super(id, img, cost, type, rarity, target);
-/* 10 */     this.tags.add(CardTagsEnum.SHION_ANASTASIA_CARD);
+/* 10 */     this.tags.add(AbstractCardTagsEnum.MINSTREL_TAGS);
 /*    */   }
 /*    */ }
 

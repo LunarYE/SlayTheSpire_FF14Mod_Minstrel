@@ -9,25 +9,20 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.evacipated.cardcrawl.mod.stslib.cards.interfaces.SpawnModificationCard;
-import com.evacipated.cardcrawl.modthespire.lib.SpireOverride;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
-import com.megacrit.cardcrawl.helpers.SaveHelper;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import pathes.AbstractCardEnum;
-import pathes.CardTagsEnum;
 
 
 
 
- public abstract class AbstractVUPShionCard
+ public abstract class AbstractMinstrelCard
    extends CustomCard
    implements SpawnModificationCard
  {
@@ -54,7 +49,7 @@ import pathes.CardTagsEnum;
 
    public String betaArtPath;
 
-   public AbstractVUPShionCard(String id, String img, int cost, CardType type, CardRarity rarity, CardTarget target) {
+   public AbstractMinstrelCard(String id, String img, int cost, CardType type, CardRarity rarity, CardTarget target) {
      super(id, (CardCrawlGame.languagePack.getCardStrings(id)).NAME, img, cost, (CardCrawlGame.languagePack.getCardStrings(id)).DESCRIPTION, type, AbstractCardEnum.MINSTREL_COLOR, rarity, target);
 
 
@@ -97,7 +92,7 @@ import pathes.CardTagsEnum;
 
 
    public AbstractCard makeStatEquivalentCopy() {
-     AbstractVUPShionCard card = (AbstractVUPShionCard)super.makeStatEquivalentCopy();
+     AbstractMinstrelCard card = (AbstractMinstrelCard)super.makeStatEquivalentCopy();
      card.secondaryM = this.secondaryM;
      card.baseSecondaryM = this.baseSecondaryM;
      card.upgradeSecondaryM = this.upgradeSecondaryM;
