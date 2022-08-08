@@ -15,6 +15,7 @@ import com.megacrit.cardcrawl.core.EnergyManager;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.events.beyond.SpireHeart;
 import com.megacrit.cardcrawl.helpers.CardHelper;
+import com.megacrit.cardcrawl.helpers.CardLibrary;
 import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.helpers.ScreenShake;
 import com.megacrit.cardcrawl.localization.CharacterStrings;
@@ -133,7 +134,7 @@ public class Minstrel extends CustomPlayer {
 
     @Override
     public AbstractCard getStartCardForEvent() {
-        return null;
+        return new Defense();
     }
 
     @Override
@@ -168,15 +169,7 @@ public class Minstrel extends CustomPlayer {
 
     @Override
     public String getLocalizedCharacterName() {
-        String char_name;
-        if (Settings.language == Settings.GameLanguage.ZHS) {
-            char_name = "吟游诗人";
-        } else if (Settings.language == Settings.GameLanguage.ZHT) {
-            char_name = "吟游诗人";
-        } else {
-            char_name = "Minstrel";
-        }
-        return char_name;
+        return charStrings.NAMES[0];
     }
 
     @Override
@@ -208,5 +201,26 @@ public class Minstrel extends CustomPlayer {
 
     public void applyEndOfTurnTriggers() {
         super.applyEndOfTurnTriggers();
+    }
+
+    @Override
+    public ArrayList<AbstractCard> getCardPool(ArrayList<AbstractCard> tmpPool) {
+        if (com.megacrit.cardcrawl.helpers.ModHelper.isModEnabled("Red Cards")) {
+            CardLibrary.addRedCards(tmpPool);
+        }
+        if (com.megacrit.cardcrawl.helpers.ModHelper.isModEnabled("Green Cards")) {
+            CardLibrary.addGreenCards(tmpPool);
+        }
+
+        if (com.megacrit.cardcrawl.helpers.ModHelper.isModEnabled("Blue Cards")) {
+            CardLibrary.addBlueCards(tmpPool);
+        }
+
+        if (com.megacrit.cardcrawl.helpers.ModHelper.isModEnabled("Purple Cards")) {
+            CardLibrary.addPurpleCards(tmpPool);
+        }
+
+
+        return super.getCardPool(tmpPool);
     }
 }

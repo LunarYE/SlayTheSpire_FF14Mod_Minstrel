@@ -2,6 +2,7 @@ package demoMod;
 
 import basemod.BaseMod;
 import basemod.abstracts.CustomCard;
+import basemod.abstracts.DynamicVariable;
 import basemod.interfaces.*;
 import cards.minstrel.*;
 import characters.Minstrel;
@@ -30,7 +31,7 @@ import java.util.Iterator;
 import java.util.List;
 
 @SpireInitializer
-public class MinstrelMod implements RelicGetSubscriber, PostPowerApplySubscriber, PostExhaustSubscriber, PostBattleSubscriber, PostDungeonInitializeSubscriber, EditCharactersSubscriber, PostInitializeSubscriber, EditRelicsSubscriber, EditCardsSubscriber, EditStringsSubscriber, OnCardUseSubscriber, EditKeywordsSubscriber, OnPowersModifiedSubscriber, PostDrawSubscriber, PostEnergyRechargeSubscriber {
+public class MinstrelMod implements PostInitializeSubscriber, EditCharactersSubscriber, EditCardsSubscriber, EditRelicsSubscriber, AddAudioSubscriber, EditKeywordsSubscriber, EditStringsSubscriber, PostDungeonInitializeSubscriber, StartActSubscriber, PostCreateStartingRelicsSubscriber {
 
     public static String MOD_ID = "MinstrelMod";
 
@@ -52,6 +53,14 @@ public class MinstrelMod implements RelicGetSubscriber, PostPowerApplySubscriber
     public static final Color SILVER = CardHelper.getColor(200, 200, 200);
     private ArrayList<AbstractCard> cardsToAdd = new ArrayList<>();
     public static ArrayList<AbstractCard> recyclecards = new ArrayList<>();
+
+    public static List<CustomCard> an_Cards = new ArrayList<>();
+    public static List<CustomCard> ku_Cards = new ArrayList<>();
+    public static List<CustomCard> li_Cards = new ArrayList<>();
+    public static List<CustomCard> mi_Cards = new ArrayList<>();
+    public static List<CustomCard> shi_Cards = new ArrayList<>();
+    public static List<CustomCard> chuan_Cards = new ArrayList<>();
+    public static List<CustomCard> codex_Cards = new ArrayList<>();
 
     public MinstrelMod() {
         //构造方法，初始化各种参数
@@ -91,6 +100,24 @@ public class MinstrelMod implements RelicGetSubscriber, PostPowerApplySubscriber
         for (CustomCard card : cards) {
             BaseMod.addCard(card);
             UnlockTracker.unlockCard(card.cardID);
+
+            if (card instanceof cards.AbstractShionAnastasiaCard) {
+                an_Cards.add(card);
+            }
+
+            if (card instanceof cards.AbstractShionAnastasiaCard) {
+                ku_Cards.add(card);
+            }
+            if (card instanceof cards.AbstractShionAnastasiaCard) {
+                li_Cards.add(card);
+            }
+            if (card instanceof cards.AbstractShionAnastasiaCard) {
+                mi_Cards.add(card);
+            }
+            if (card instanceof cards.AbstractShionAnastasiaCard) {
+                shi_Cards.add(card);
+            }
+
         }
 
 //        Iterator<AbstractCard> var1 = this.cardsToAdd.iterator();
@@ -100,17 +127,17 @@ public class MinstrelMod implements RelicGetSubscriber, PostPowerApplySubscriber
 //        }
     }
 
-    @Override
+
     public void receivePostExhaust(AbstractCard c) {
     }
 
-    @Override
+
     public void receivePostPowerApplySubscriber(AbstractPower pow, AbstractCreature target, AbstractCreature owner) {
 
     }
 
 
-    @Override
+
     public void receivePowersModified() {
     }
 
@@ -120,7 +147,7 @@ public class MinstrelMod implements RelicGetSubscriber, PostPowerApplySubscriber
     }
 
 
-    @Override
+
     public void receivePostDraw(AbstractCard arg0) {
     }
 
@@ -183,21 +210,21 @@ public class MinstrelMod implements RelicGetSubscriber, PostPowerApplySubscriber
         BaseMod.addRelicToCustomPool((AbstractRelic) new MinstrelBegin(), AbstractCardEnum.MINSTREL_COLOR);
     }
 
-    @Override
+
     public void receiveRelicGet(AbstractRelic relic) {
-        //移除遗物,这里移除了小屋子，太垃圾了。 q
+        //移除遗物,这里移除了小屋子，太垃圾了。
 
         if (AbstractDungeon.player.name == "Minstrel") {
             AbstractDungeon.shopRelicPool.remove("TinyHouse");
         }
     }
 
-    @Override
+
     public void receiveCardUsed(AbstractCard abstractCard) {
 
     }
 
-    @Override
+
     public void receivePostBattle(AbstractRoom r) {
 
     }
@@ -207,7 +234,7 @@ public class MinstrelMod implements RelicGetSubscriber, PostPowerApplySubscriber
 
     }
 
-    @Override
+
     public void receivePostEnergyRecharge() {
         Iterator<AbstractCard> var1 = recyclecards.iterator();
 
@@ -219,6 +246,21 @@ public class MinstrelMod implements RelicGetSubscriber, PostPowerApplySubscriber
         recyclecards.clear();
     }
 
+    @Override
+    public void receiveAddAudio() {
+
+    }
+
+    @Override
+    public void receivePostCreateStartingRelics(AbstractPlayer.PlayerClass playerClass, ArrayList<String> arrayList) {
+
+    }
+
+    @Override
+    public void receiveStartAct() {
+
+    }
+
     class Keywords {
         Keyword[] keywords;
     }
@@ -226,5 +268,7 @@ public class MinstrelMod implements RelicGetSubscriber, PostPowerApplySubscriber
     public static String assetPath(String path) {
         return MOD_ID + "/" + path;
     }
+
+
 }
 

@@ -58,7 +58,7 @@ public class Quick extends AbstractExampleCard {
     /**
      * 定义卡牌稀有度
      */
-    private static final CardRarity RARITY = CardRarity.BASIC;
+    private static final CardRarity RARITY = CardRarity.COMMON;
     /**
      * 定义卡牌指向对象
      */

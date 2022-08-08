@@ -55,7 +55,7 @@ public class Straight extends AbstractExampleCard {
     /**
      * 定义卡牌稀有度
      */
-    private static final AbstractCard.CardRarity RARITY = AbstractCard.CardRarity.SPECIAL;
+    private static final AbstractCard.CardRarity RARITY = AbstractCard.CardRarity.COMMON;
     /**
      * 定义卡牌指向对象
      */
