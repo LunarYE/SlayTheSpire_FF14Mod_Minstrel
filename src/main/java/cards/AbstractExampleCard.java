@@ -67,7 +67,11 @@ public class AbstractExampleCard extends CustomCard implements SpawnModification
 //        return String.format("img/cards/test_"+type+".png");
 //    }
 
+    public AbstractExampleCard(String id, String name, int cost, String rawDescription,
+                               CardType type, CardColor color, CardRarity rarity, CardTarget target) {
 
+        super(id, name,  "img/minstrel/cards/test.png", cost, rawDescription, type, color, rarity, target);
+    }
 
 
     // 简化伤害代码

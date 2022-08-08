@@ -1,8 +1,8 @@
 {
-  "GuiltyPower": {
-    "NAME": "负罪:",
+  "Minstrel:ArmyPaeonPower": {
+    "NAME": "军神的赞美歌:",
     "DESCRIPTIONS": [
-      "获得等层数的力量,回合结束时对自己增加等层数的缠绕"
+      "每回合从抽牌堆中抽取 #y诗心层数 ( #b%d ) 张卡"
     ]
   }
 }

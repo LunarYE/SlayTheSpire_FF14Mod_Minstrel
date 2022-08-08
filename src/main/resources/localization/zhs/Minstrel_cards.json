@@ -22,5 +22,9 @@
   "Minstrel:DeathRain": {
     "NAME": "死亡箭雨",
     "DESCRIPTION": "造成 !D! 点伤害,并有30%概率生成并从死亡箭雨和失血箭中选一张 NL 消耗"
+  },
+  "Minstrel:Venomous": {
+    "NAME": "毒咬箭",
+    "DESCRIPTION": "给予 !M! 层中毒状态"
   }
 }

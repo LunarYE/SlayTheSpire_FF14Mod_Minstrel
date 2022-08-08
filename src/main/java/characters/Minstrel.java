@@ -1,16 +1,22 @@
 package characters;
 
 import basemod.abstracts.CustomPlayer;
+import cards.minstrel.Attack;
+import cards.minstrel.Defense;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.math.MathUtils;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.cards.blue.*;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.EnergyManager;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.events.beyond.SpireHeart;
 import com.megacrit.cardcrawl.helpers.CardHelper;
 import com.megacrit.cardcrawl.helpers.FontHelper;
+import com.megacrit.cardcrawl.helpers.ScreenShake;
 import com.megacrit.cardcrawl.screens.CharSelectInfo;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
 import pathes.ThmodClassEnum;
@@ -54,13 +60,15 @@ public class Minstrel extends CustomPlayer {
     public ArrayList<String> getStartingDeck() {
         //添加初始卡组
         ArrayList<String> retVal = new ArrayList<>();
-        retVal.add("Minstrel:Attack");
-        retVal.add("Minstrel:Attack");
-        retVal.add("Minstrel:Attack");
-        retVal.add("Minstrel:Defense");
-        retVal.add("Minstrel:Defense");
-        retVal.add("Minstrel:Defense");
-        retVal.add("Minstrel:Defense");
+        retVal.add(Attack.ID);
+        retVal.add(Attack.ID);
+        retVal.add(Attack.ID);
+        retVal.add(Attack.ID);
+        retVal.add(Defense.ID);
+        retVal.add(Defense.ID);
+        retVal.add(Defense.ID);
+        retVal.add(Defense.ID);
+
         return retVal;
     }
 
@@ -140,7 +148,8 @@ public class Minstrel extends CustomPlayer {
 
     @Override
     public void doCharSelectScreenSelectEffect() {
-
+        CardCrawlGame.sound.playA("ATTACK_MAGIC_BEAM_SHORT", MathUtils.random(-0.2F, 0.2F));
+        CardCrawlGame.screenShake.shake(ScreenShake.ShakeIntensity.MED, ScreenShake.ShakeDur.SHORT, false);
     }
 
     public void updateOrb(int orbCount) {
@@ -149,7 +158,7 @@ public class Minstrel extends CustomPlayer {
 
     @Override
     public String getCustomModeCharacterButtonSoundKey() {
-        return null;
+        return "ATTACK_MAGIC_BEAM_SHORT";
     }
 
     @Override
@@ -182,7 +191,8 @@ public class Minstrel extends CustomPlayer {
 
     @Override
     public AbstractGameAction.AttackEffect[] getSpireHeartSlashEffect() {
-        return new AbstractGameAction.AttackEffect[0];
+        return new AbstractGameAction.AttackEffect[] { AbstractGameAction.AttackEffect.SLASH_HEAVY, AbstractGameAction.AttackEffect.FIRE, AbstractGameAction.AttackEffect.SLASH_DIAGONAL, AbstractGameAction.AttackEffect.SLASH_HEAVY, AbstractGameAction.AttackEffect.FIRE, AbstractGameAction.AttackEffect.SLASH_DIAGONAL
+        };
     }
 
     @Override

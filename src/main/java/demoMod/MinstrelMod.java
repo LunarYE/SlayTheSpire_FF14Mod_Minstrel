@@ -1,6 +1,7 @@
 package demoMod;
 
 import basemod.BaseMod;
+import basemod.abstracts.CustomCard;
 import basemod.interfaces.*;
 import cards.minstrel.*;
 import characters.Minstrel;
@@ -20,6 +21,7 @@ import com.megacrit.cardcrawl.localization.RelicStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
+import com.megacrit.cardcrawl.unlock.UnlockTracker;
 import com.megacrit.cardcrawl.vfx.cardManip.ShowCardAndAddToDrawPileEffect;
 import pathes.AbstractCardEnum;
 import pathes.ThmodClassEnum;
@@ -28,6 +30,7 @@ import relics.MinstrelBegin;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 @SpireInitializer
 public class MinstrelMod implements RelicGetSubscriber, PostPowerApplySubscriber, PostExhaustSubscriber, PostBattleSubscriber, PostDungeonInitializeSubscriber, EditCharactersSubscriber, PostInitializeSubscriber, EditRelicsSubscriber, EditCardsSubscriber, EditStringsSubscriber, OnCardUseSubscriber, EditKeywordsSubscriber, OnPowersModifiedSubscriber, PostDrawSubscriber, PostEnergyRechargeSubscriber {
@@ -73,12 +76,27 @@ public class MinstrelMod implements RelicGetSubscriber, PostPowerApplySubscriber
     @Override
     public void receiveEditCards() {
         //将卡牌批量添加
-        loadCardsToAdd();
-        Iterator<AbstractCard> var1 = this.cardsToAdd.iterator();
-        while (var1.hasNext()) {
-            AbstractCard card = var1.next();
+        List<CustomCard> cards = new ArrayList<>();
+        //将自定义的卡牌添加到这里
+
+        cards.add(new Quick());
+        cards.add(new ShadowBite());
+        cards.add(new Straight());
+        cards.add(new DeathRain());
+        cards.add(new Venomous());
+
+        cards.add(new Attack());
+        cards.add(new Defense());
+        for (CustomCard card : cards) {
             BaseMod.addCard(card);
+            UnlockTracker.unlockCard(card.cardID);
         }
+
+//        Iterator<AbstractCard> var1 = this.cardsToAdd.iterator();
+//        while (var1.hasNext()) {
+//            AbstractCard card = var1.next();
+//            BaseMod.addCard(card);
+//        }
     }
 
     @Override
@@ -163,7 +181,7 @@ public class MinstrelMod implements RelicGetSubscriber, PostPowerApplySubscriber
 
     @Override
     public void receiveRelicGet(AbstractRelic relic) {
-        //移除遗物,这里移除了小屋子，太垃圾了。
+        //移除遗物,这里移除了小屋子，太垃圾了。 q
 
         if (AbstractDungeon.player.name == "Minstrel") {
             AbstractDungeon.shopRelicPool.remove("TinyHouse");
