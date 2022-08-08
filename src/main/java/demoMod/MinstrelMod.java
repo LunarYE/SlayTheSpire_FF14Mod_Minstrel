@@ -31,6 +31,9 @@ import java.util.Iterator;
 
 @SpireInitializer
 public class MinstrelMod implements RelicGetSubscriber, PostPowerApplySubscriber, PostExhaustSubscriber, PostBattleSubscriber, PostDungeonInitializeSubscriber, EditCharactersSubscriber, PostInitializeSubscriber, EditRelicsSubscriber, EditCardsSubscriber, EditStringsSubscriber, OnCardUseSubscriber, EditKeywordsSubscriber, OnPowersModifiedSubscriber, PostDrawSubscriber, PostEnergyRechargeSubscriber {
+
+    public static String MOD_ID = "MinstrelMod";
+
     private static final String MOD_BADGE = "img/minstrel/UI/badge.png";
     //攻击、技能、能力牌的背景图片(512)
     private static final String ATTACK_CC = "img/512/bg_attack_SELES_s.png";
@@ -148,6 +151,7 @@ public class MinstrelMod implements RelicGetSubscriber, PostPowerApplySubscriber
         this.cardsToAdd.add(new ShadowBite());
         this.cardsToAdd.add(new Straight());
         this.cardsToAdd.add(new DeathRain());
+        this.cardsToAdd.add(new Venomous());
     }
 
     //添加一度
@@ -195,6 +199,10 @@ public class MinstrelMod implements RelicGetSubscriber, PostPowerApplySubscriber
 
     class Keywords {
         Keyword[] keywords;
+    }
+
+    public static String assetPath(String path) {
+        return MOD_ID + "/" + path;
     }
 }
 

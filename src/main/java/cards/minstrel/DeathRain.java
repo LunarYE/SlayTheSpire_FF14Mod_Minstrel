@@ -74,7 +74,7 @@ public class DeathRain extends AbstractExampleCard {
     private static final AbstractCard.CardTarget TARGET = CardTarget.ALL_ENEMY;
 
     public DeathRain() {
-        super(ID, NAME, IMG_PATH, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
+        super(ID, NAME, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
         //消耗
         this.exhaust = true;
         this.baseDamage = NUMERICAL;

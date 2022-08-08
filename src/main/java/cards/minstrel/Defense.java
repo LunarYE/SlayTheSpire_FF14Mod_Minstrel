@@ -1,6 +1,7 @@
 package cards.minstrel;
 
 import basemod.abstracts.CustomCard;
+import cards.AbstractExampleCard;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -11,7 +12,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import helpers.ModHelper;
 import pathes.AbstractCardEnum;
 
-public class Defense extends CustomCard {
+public class Defense extends AbstractExampleCard {
     /**
      * 获取类名作为卡牌id
      */
@@ -64,7 +65,7 @@ public class Defense extends CustomCard {
 
     public Defense() {
         //调用父类的构造方法，传参为super(卡牌ID,卡牌名称，能量花费，卡牌描述，卡牌类型，卡牌颜色，卡牌稀有度，卡牌目标)
-        super(ID, NAME, IMG_PATH, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
+        super(ID, NAME, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
         //添加基础防御标签和将格挡设为5
         this.tags.add(CardTags.STARTER_DEFEND);
         this.baseBlock = NUMERICAL;
