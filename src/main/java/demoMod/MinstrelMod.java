@@ -14,17 +14,14 @@ import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.CardHelper;
-import com.megacrit.cardcrawl.localization.CardStrings;
-import com.megacrit.cardcrawl.localization.Keyword;
-import com.megacrit.cardcrawl.localization.PowerStrings;
-import com.megacrit.cardcrawl.localization.RelicStrings;
+import com.megacrit.cardcrawl.localization.*;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
 import com.megacrit.cardcrawl.vfx.cardManip.ShowCardAndAddToDrawPileEffect;
 import pathes.AbstractCardEnum;
-import pathes.ThmodClassEnum;
+import pathes.AbstractPlayerEnum;
 import relics.MinstrelBegin;
 
 import java.nio.charset.StandardCharsets;
@@ -58,14 +55,17 @@ public class MinstrelMod implements RelicGetSubscriber, PostPowerApplySubscriber
 
     public MinstrelMod() {
         //构造方法，初始化各种参数
-        BaseMod.subscribe((ISubscriber) this);
+        BaseMod.subscribe(this);
         BaseMod.addColor(AbstractCardEnum.MINSTREL_COLOR, SILVER, SILVER, SILVER, SILVER, SILVER, SILVER, SILVER, ATTACK_CC, SKILL_CC, POWER_CC, ENERGY_ORB_CC, ATTACK_CC_PORTRAIT, SKILL_CC_PORTRAIT, POWER_CC_PORTRAIT, ENERGY_ORB_CC_PORTRAIT, CARD_ENERGY_ORB);
     }
 
     @Override
     public void receiveEditCharacters() {
         //添加角色到MOD中
-        BaseMod.addCharacter((AbstractPlayer) new Minstrel("Minstrel"), MY_CHARACTER_BUTTON, MARISA_PORTRAIT, ThmodClassEnum.MINSTREL_CLASS);
+//        BaseMod.addCharacter((AbstractPlayer) new Minstrel("Minstrel"), MY_CHARACTER_BUTTON, MARISA_PORTRAIT, ThmodClassEnum.MINSTREL_CLASS);
+        BaseMod.addCharacter(new Minstrel(Minstrel.charStrings.NAMES[1],AbstractPlayerEnum.MINSTREL),
+                MY_CHARACTER_BUTTON,
+                MARISA_PORTRAIT, AbstractPlayerEnum.MINSTREL);
     }
 
     //初始化整个MOD,一定不能删
@@ -75,6 +75,7 @@ public class MinstrelMod implements RelicGetSubscriber, PostPowerApplySubscriber
 
     @Override
     public void receiveEditCards() {
+
         //将卡牌批量添加
         List<CustomCard> cards = new ArrayList<>();
         //将自定义的卡牌添加到这里
@@ -137,17 +138,20 @@ public class MinstrelMod implements RelicGetSubscriber, PostPowerApplySubscriber
     public void receiveEditStrings() {
         //读取遗物，卡牌，能力，药水，事件的JSON文本
 
-        String relic = "", card = "", power = "", potion = "", event = "";
+        String relic = "", card = "", power = "", charecter = "", event = "";
         if (Settings.language == Settings.GameLanguage.ZHS) {
             card = "localization/zhs/Minstrel_cards.json";
             relic = "localization/zhs/Minstrel_relics.json";
             power = "localization/zhs/Minstrel_powers.json";
+            charecter = "localization/zhs/Minstrel_character.json";
             //potion = "localization/ThMod_YM_potions-zh.json";
             //event = "localization/ThMod_YM_events-zh.json";
         } else {
             //其他语言配置的JSON
         }
 
+        String charecterStrings = Gdx.files.internal(charecter).readString(String.valueOf(StandardCharsets.UTF_8));
+        BaseMod.loadCustomStrings(CharacterStrings.class, charecterStrings);
         String relicStrings = Gdx.files.internal(relic).readString(String.valueOf(StandardCharsets.UTF_8));
         BaseMod.loadCustomStrings(RelicStrings.class, relicStrings);
         String cardStrings = Gdx.files.internal(card).readString(String.valueOf(StandardCharsets.UTF_8));

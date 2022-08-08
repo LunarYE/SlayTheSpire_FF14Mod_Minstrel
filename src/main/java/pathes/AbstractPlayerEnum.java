@@ -8,7 +8,7 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
  * 备注: 定义角色标签
  */
 
-public class ThmodClassEnum {
+public class AbstractPlayerEnum {
     @SpireEnum
-    public static AbstractPlayer.PlayerClass MINSTREL_CLASS;
+    public static AbstractPlayer.PlayerClass MINSTREL;
 }

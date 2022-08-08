@@ -17,14 +17,19 @@ import com.megacrit.cardcrawl.events.beyond.SpireHeart;
 import com.megacrit.cardcrawl.helpers.CardHelper;
 import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.helpers.ScreenShake;
+import com.megacrit.cardcrawl.localization.CharacterStrings;
 import com.megacrit.cardcrawl.screens.CharSelectInfo;
+import com.megacrit.cardcrawl.ui.panels.energyorb.EnergyOrbInterface;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
-import pathes.ThmodClassEnum;
+import demoMod.MinstrelMod;
+import helpers.ModHelper;
+import pathes.AbstractPlayerEnum;
 import pathes.AbstractCardEnum;
 
 import java.util.ArrayList;
 
 public class Minstrel extends CustomPlayer {
+    public static final CharacterStrings charStrings = CardCrawlGame.languagePack.getCharacterString(ModHelper.makeID(Minstrel.class.getSimpleName()));
     //初始能量
     private static final int ENERGY_PER_TURN = 3;
     //以下图片依次作用为[篝火休息处的角色背影2，篝火休息处的角色背影1，角色死亡后倒下的图片，角色平常站立时的图片]
@@ -45,9 +50,9 @@ public class Minstrel extends CustomPlayer {
     //返回一个颜色
     public static final Color SILVER = CardHelper.getColor(200, 200, 200);
 
-    public Minstrel(String name) {
+    public Minstrel(String name, AbstractPlayer.PlayerClass setClass)  {
         //构造方法，初始化参数
-        super(name, ThmodClassEnum.MINSTREL_CLASS, ORB_TEXTURES, ORB_VFX, LAYER_SPEED, (String) null, (String) null);
+        super(name, setClass,(EnergyOrbInterface)new EnergyOrbMinstrel(ORB_TEXTURES, ORB_VFX), (String) null, (String) null);
         this.dialogX = this.drawX + 0.0F * Settings.scale;
         this.dialogY = this.drawY + 220.0F * Settings.scale;
         initializeClass(SELES_STAND, SELES_SHOULDER_2, SELES_SHOULDER_1, SELES_CORPSE,
@@ -176,12 +181,12 @@ public class Minstrel extends CustomPlayer {
 
     @Override
     public AbstractPlayer newInstance() {
-        return (AbstractPlayer) new Minstrel(this.name);
+        return (AbstractPlayer)new Minstrel(this.name,AbstractPlayerEnum.MINSTREL);
     }
 
     @Override
     public String getSpireHeartText() {
-        return SpireHeart.DESCRIPTIONS[10];
+        return "NL 你操纵着浮游炮发起了全力一击……";
     }
 
     @Override
