@@ -26,5 +26,21 @@
   "Minstrel:Venomous": {
     "NAME": "毒咬箭",
     "DESCRIPTION": "给予 !M! 层中毒状态"
+  },
+  "Minstrel:ArmyPaeon": {
+    "NAME": "军神的赞美歌",
+    "DESCRIPTION": "获得 MinstrelMod:军神的赞美歌 状态"
+  },
+  "Minstrel:MageBallad": {
+    "NAME": "贤者的叙事谣",
+    "DESCRIPTION": "获得 MinstrelMod:贤者的叙事谣 状态"
+  },
+  "Minstrel:WandererMinuet": {
+    "NAME": "放浪神的小步舞曲",
+    "DESCRIPTION": "获得 MinstrelMod:放浪神的小步舞曲 状态"
+  },
+  "Minstrel:PerfectPitch": {
+    "NAME": "完美音调",
+    "DESCRIPTION": "造成 #b诗心 层数*5的伤害( !D! 点伤害) NL 消耗，虚无"
   }
 }

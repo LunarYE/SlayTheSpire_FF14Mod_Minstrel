@@ -9,6 +9,7 @@ import characters.Minstrel;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
+import com.google.gson.Gson;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.AbstractCreature;
@@ -94,6 +95,10 @@ public class MinstrelMod implements PostInitializeSubscriber, EditCharactersSubs
         cards.add(new Straight());
         cards.add(new DeathRain());
         cards.add(new Venomous());
+        cards.add(new ArmyPaeon());
+        cards.add(new MageBallad());
+        cards.add(new PerfectPitch());
+        cards.add(new WandererMinuet());
 
         cards.add(new Attack());
         cards.add(new Defense());
@@ -158,7 +163,48 @@ public class MinstrelMod implements PostInitializeSubscriber, EditCharactersSubs
 
     @Override
     public void receiveEditKeywords() {
+//        Gson gson = new Gson();
+        Settings.GameLanguage language = languageSupport();
+//        loadLocKeywords(Settings.GameLanguage.ENG);
+        if (!language.equals(Settings.GameLanguage.ENG)){
+            loadLocKeywords(language);
+        }
 
+
+//        String json = Gdx.files.internal("ModExampleResources/localization/Keywords_" + lang + ".json")
+//                .readString(String.valueOf(StandardCharsets.UTF_8));
+//        Keyword[] keywords = gson.fromJson(json, Keyword[].class);
+//        if (keywords != null) {
+//            for (Keyword keyword : keywords) {
+//                BaseMod.addKeyword("examplemod", keyword.NAMES[0], keyword.NAMES, keyword.DESCRIPTION);
+//            }
+//        }
+    }
+
+    private Settings.GameLanguage languageSupport() {
+        switch (Settings.language) {
+            case ZHS:
+                return Settings.language;
+            case DEU:
+                return Settings.language;
+            case ZHT:
+                return Settings.language;
+            default:
+                return Settings.GameLanguage.ENG;
+        }
+    }
+
+    private void loadLocKeywords(Settings.GameLanguage language) {
+        String path = "localization/" + language.toString().toLowerCase() + "/";
+        Gson gson = new Gson();
+
+        String json = Gdx.files.internal(path + "KeywordStrings.json").readString(String.valueOf(StandardCharsets.UTF_8));
+        com.evacipated.cardcrawl.mod.stslib.Keyword[] keywords = (com.evacipated.cardcrawl.mod.stslib.Keyword[])gson.fromJson(json, com.evacipated.cardcrawl.mod.stslib.Keyword[].class);
+        if (keywords != null) {
+            for (com.evacipated.cardcrawl.mod.stslib.Keyword keyword : keywords) {
+                BaseMod.addKeyword("MinstrelMod", keyword.PROPER_NAME, keyword.NAMES, keyword.DESCRIPTION);
+            }
+        }
     }
 
     @Override
@@ -191,17 +237,17 @@ public class MinstrelMod implements PostInitializeSubscriber, EditCharactersSubs
 //     BaseMod.loadCustomStrings(EventStrings.class, eventStrings);
     }
 
-    private void loadCardsToAdd() {
-        //将自定义的卡牌添加到这里
-        this.cardsToAdd.clear();
-        this.cardsToAdd.add(new Attack());
-        this.cardsToAdd.add(new Defense());
-        this.cardsToAdd.add(new Quick());
-        this.cardsToAdd.add(new ShadowBite());
-        this.cardsToAdd.add(new Straight());
-        this.cardsToAdd.add(new DeathRain());
-        this.cardsToAdd.add(new Venomous());
-    }
+//    private void loadCardsToAdd() {
+//        //将自定义的卡牌添加到这里
+//        this.cardsToAdd.clear();
+//        this.cardsToAdd.add(new Attack());
+//        this.cardsToAdd.add(new Defense());
+//        this.cardsToAdd.add(new Quick());
+//        this.cardsToAdd.add(new ShadowBite());
+//        this.cardsToAdd.add(new Straight());
+//        this.cardsToAdd.add(new DeathRain());
+//        this.cardsToAdd.add(new Venomous());
+//    }
 
     //添加一度
     @Override

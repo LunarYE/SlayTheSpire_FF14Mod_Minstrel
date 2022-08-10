@@ -13,9 +13,13 @@ import pathes.AbstractCardEnum;
 
 public class Straight extends AbstractExampleCard {
     /**
+     * 获取类名
+     */
+    public static final String CLASS_NAME = Straight.class.getSimpleName();
+    /**
      * 获取类名作为卡牌id
      */
-    public static final String ID = ModHelper.MakePath(Straight.class.getSimpleName());
+    public static final String ID = ModHelper.MakePath(CLASS_NAME);
     /**
      * 卡牌贴图路径
      */

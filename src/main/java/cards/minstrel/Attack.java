@@ -16,13 +16,17 @@ import pathes.AbstractCardEnum;
 
 public class Attack extends AbstractExampleCard {
     /**
+     * 获取类名
+     */
+    public static final String CLASS_NAME = Attack.class.getSimpleName();
+    /**
      * 获取类名作为卡牌id
      */
-    public static final String ID = ModHelper.MakePath(Attack.class.getSimpleName());
+    public static final String ID = ModHelper.MakePath(CLASS_NAME);
     /**
      * 卡牌贴图路径
      */
-    private static final String IMG_PATH = "img/minstrel/cards/test.png";
+    private static final String IMG_PATH = "img/minstrel/cards/"+CLASS_NAME+".png";
     /**
      * 卡牌基础费用
      */
@@ -66,7 +70,7 @@ public class Attack extends AbstractExampleCard {
 
     public Attack() {
         //调用父类的构造方法，传参为super(卡牌ID,卡牌名称，能量花费，卡牌描述，卡牌类型，卡牌颜色，卡牌稀有度，卡牌目标)
-        super(ID, NAME, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
+        super(ID, NAME,IMG_PATH, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
         //添加基础攻击标签
         this.tags.add(CardTags.STRIKE);
         this.tags.add(CardTags.STARTER_STRIKE);

@@ -1,7 +1,11 @@
 package relics;
 
+import actions.SelectCardToHandAction;
 import basemod.abstracts.CustomRelic;
+import cards.minstrel.*;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
+import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.actions.common.RelicAboveCreatureAction;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;
@@ -9,7 +13,13 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
+import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
+import powers.minstrel.ArmyPaeonPower;
+import powers.minstrel.PoetSoulPower;
+
+import java.util.ArrayList;
+import java.util.Random;
 
 // 继承CustomRelic
 public class MinstrelBegin extends CustomRelic {
@@ -44,23 +54,34 @@ public class MinstrelBegin extends CustomRelic {
     @Override
     public void atBattleStart() {
         //在战斗开始时触发
-        this.counter = 0;
+//        this.counter = 0;
+        //3张演奏曲选择一张加入到手牌
+        addToBot((AbstractGameAction) new SelectCardToHandAction(returnRandomCardByCardTagInCombat(), true, true));
+    }
+    @Override
+    public void atTurnStart() {
+        Random random = new Random();
+        int n5 = random.nextInt(100);
+//        if (n5<=30){
+            addToBot((AbstractGameAction)new ApplyPowerAction((AbstractCreature)AbstractDungeon.player, (AbstractCreature)AbstractDungeon.player,
+                    (AbstractPower)new PoetSoulPower((AbstractCreature)AbstractDungeon.player, 1)));
+//        }
     }
 
-    @Override
-    public void onUseCard(AbstractCard card, UseCardAction action) {
-        //在用户使用牌时触发
-        if (card.type == AbstractCard.CardType.SKILL) {
-            this.counter++;
-            if (this.counter % 2 == 0) {
-                //如果是2的倍数，counter=0和获得5点格挡
-                this.counter = 0;
-                flash();
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction) new RelicAboveCreatureAction((AbstractCreature) AbstractDungeon.player, (AbstractRelic) this));
-                AbstractDungeon.actionManager.addToBottom((AbstractGameAction) new GainBlockAction((AbstractCreature) AbstractDungeon.player, (AbstractCreature) AbstractDungeon.player, 3));
-            }
-        }
-    }
+//    @Override
+//    public void onUseCard(AbstractCard card, UseCardAction action) {
+//        //在用户使用牌时触发
+//        if (card.type == AbstractCard.CardType.SKILL) {
+//            this.counter++;
+//            if (this.counter % 2 == 0) {
+//                //如果是2的倍数，counter=0和获得5点格挡
+//                this.counter = 0;
+//                flash();
+//                AbstractDungeon.actionManager.addToBottom((AbstractGameAction) new RelicAboveCreatureAction((AbstractCreature) AbstractDungeon.player, (AbstractRelic) this));
+//                AbstractDungeon.actionManager.addToBottom((AbstractGameAction) new GainBlockAction((AbstractCreature) AbstractDungeon.player, (AbstractCreature) AbstractDungeon.player, 3));
+//            }
+//        }
+//    }
 
     @Override
     public void onVictory() {
@@ -79,5 +100,14 @@ public class MinstrelBegin extends CustomRelic {
     @Override
     public AbstractRelic makeCopy() {
         return new MinstrelBegin();
+    }
+
+    public static ArrayList<AbstractCard> returnRandomCardByCardTagInCombat() {
+        ArrayList<AbstractCard> returnCard = new ArrayList<>();
+        returnCard.add(new ArmyPaeon());
+        returnCard.add(new MageBallad());
+        returnCard.add(new WandererMinuet());
+
+        return returnCard;
     }
 }

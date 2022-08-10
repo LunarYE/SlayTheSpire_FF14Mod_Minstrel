@@ -1,22 +1,25 @@
 package cards.minstrel;
 
-import basemod.abstracts.CustomCard;
 import cards.AbstractExampleCard;
-import com.megacrit.cardcrawl.actions.common.GainBlockAction;
-import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.common.DamageAction;
+import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import helpers.ModHelper;
 import pathes.AbstractCardEnum;
+import powers.minstrel.PoetSoulPower;
 
-public class Defense extends AbstractExampleCard {
+
+public class PerfectPitch extends AbstractExampleCard {
     /**
      * 获取类名
      */
-    public static final String CLASS_NAME = Defense.class.getSimpleName();
+    public static final String CLASS_NAME = PerfectPitch.class.getSimpleName();
     /**
      * 获取类名作为卡牌id
      */
@@ -32,11 +35,11 @@ public class Defense extends AbstractExampleCard {
     /**
      * 卡牌基础数值
      */
-    private static final int NUMERICAL = 5;
+    private static final int NUMERICAL = 0;
     /**
      * 升级后提高的数值
      */
-    private static final int UPGRADE_NUMERICAL = 5;
+    private static final int UPGRADE_NUMERICAL = 0;
     /**
      * 从.json文件中提取键名为卡牌id的信息
      */
@@ -52,7 +55,7 @@ public class Defense extends AbstractExampleCard {
     /**
      * 定义卡牌类型
      */
-    private static final CardType TYPE = CardType.SKILL;
+    private static final CardType TYPE = CardType.ATTACK;
     /**
      * 定义卡牌颜色
      */
@@ -60,41 +63,45 @@ public class Defense extends AbstractExampleCard {
     /**
      * 定义卡牌稀有度
      */
-    private static final CardRarity RARITY = CardRarity.BASIC;
+    private static final CardRarity RARITY = CardRarity.COMMON;
     /**
      * 定义卡牌指向对象
      */
-    private static final CardTarget TARGET = CardTarget.SELF;
+    private static final CardTarget TARGET = CardTarget.ENEMY;
 
-
-    public Defense() {
-        //调用父类的构造方法，传参为super(卡牌ID,卡牌名称，能量花费，卡牌描述，卡牌类型，卡牌颜色，卡牌稀有度，卡牌目标)
+    public PerfectPitch() {
         super(ID, NAME, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
-        //添加基础防御标签和将格挡设为5
-        this.tags.add(CardTags.STARTER_DEFEND);
-        this.baseBlock = NUMERICAL;
+        //消耗
+        this.exhaust = true;
+        this.isEthereal = true;
+        this.baseDamage = NUMERICAL;
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        //使用卡牌时触发的动作
-        AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, p, this.block));
+
+        addToBot((AbstractGameAction) new DamageAction((AbstractCreature) m, new DamageInfo((AbstractCreature) p, this.damage, this.damageTypeForTurn), AbstractGameAction.AttackEffect.LIGHTNING));
+
+//        addToBot((AbstractGameAction) new LoseCorGladiiAction(true));
+//        damageToEnemy(m, AbstractGameAction.AttackEffect.SLASH_HORIZONTAL);
     }
 
     @Override
-    public AbstractCard makeCopy() {
-        //复制卡牌时触发
-        return new Defense();
-    }
+    public void calculateCardDamage(AbstractMonster mo) {
+        int trueDamage = this.baseDamage;
 
-    @Override
-    public void upgrade() {
-        //卡牌升级后的效果
-        if (!this.upgraded) {
-            //更改名字和提高3点格挡
-            upgradeName();
-            upgradeBlock(UPGRADE_NUMERICAL);
+        this.baseDamage = 1;
+        if (AbstractDungeon.player.hasPower(PoetSoulPower.POWER_ID)) {
+            this.baseDamage += (AbstractDungeon.player.getPower(PoetSoulPower.POWER_ID)).amount*5;
         }
+        super.calculateCardDamage(mo);
+
+        this.baseDamage = trueDamage;
     }
 
+    @Override
+    public void limitedUpgrade() {
+        super.limitedUpgrade();
+        this.upgradeDamage(UPGRADE_NUMERICAL);
+    }
 }

@@ -1,22 +1,25 @@
 package cards.minstrel;
 
-import basemod.abstracts.CustomCard;
 import cards.AbstractExampleCard;
-import com.megacrit.cardcrawl.actions.common.GainBlockAction;
-import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
+import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.powers.AbstractPower;
 import helpers.ModHelper;
 import pathes.AbstractCardEnum;
+import powers.minstrel.ArmyPaeonPower;
+import powers.minstrel.MageBalladPower;
 
-public class Defense extends AbstractExampleCard {
+public class MageBallad extends AbstractExampleCard {
     /**
      * 获取类名
      */
-    public static final String CLASS_NAME = Defense.class.getSimpleName();
+    public static final String CLASS_NAME = MageBallad.class.getSimpleName();
     /**
      * 获取类名作为卡牌id
      */
@@ -32,11 +35,11 @@ public class Defense extends AbstractExampleCard {
     /**
      * 卡牌基础数值
      */
-    private static final int NUMERICAL = 5;
+    private static final int NUMERICAL = 3;
     /**
      * 升级后提高的数值
      */
-    private static final int UPGRADE_NUMERICAL = 5;
+    private static final int UPGRADE_NUMERICAL = 3;
     /**
      * 从.json文件中提取键名为卡牌id的信息
      */
@@ -52,7 +55,7 @@ public class Defense extends AbstractExampleCard {
     /**
      * 定义卡牌类型
      */
-    private static final CardType TYPE = CardType.SKILL;
+    private static final CardType TYPE = CardType.POWER;
     /**
      * 定义卡牌颜色
      */
@@ -60,41 +63,36 @@ public class Defense extends AbstractExampleCard {
     /**
      * 定义卡牌稀有度
      */
-    private static final CardRarity RARITY = CardRarity.BASIC;
+    private static final CardRarity RARITY = CardRarity.RARE;
     /**
      * 定义卡牌指向对象
      */
     private static final CardTarget TARGET = CardTarget.SELF;
 
-
-    public Defense() {
-        //调用父类的构造方法，传参为super(卡牌ID,卡牌名称，能量花费，卡牌描述，卡牌类型，卡牌颜色，卡牌稀有度，卡牌目标)
+    public MageBallad() {
         super(ID, NAME, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
-        //添加基础防御标签和将格挡设为5
-        this.tags.add(CardTags.STARTER_DEFEND);
-        this.baseBlock = NUMERICAL;
+        //消耗
+        this.exhaust = true;
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        //使用卡牌时触发的动作
-        AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, p, this.block));
-    }
-
-    @Override
-    public AbstractCard makeCopy() {
-        //复制卡牌时触发
-        return new Defense();
-    }
-
-    @Override
-    public void upgrade() {
-        //卡牌升级后的效果
-        if (!this.upgraded) {
-            //更改名字和提高3点格挡
-            upgradeName();
-            upgradeBlock(UPGRADE_NUMERICAL);
+//        AbstractDungeon.actionManager.addToBottom(
+//                new ApplyPowerAction(m, new DamageInfo(p, this.damage, this.damageTypeForTurn), AbstractGameAction.AttackEffect.SLASH_HORIZONTAL));
+        if (p.hasPower("ArmyPaeonPower")){
+            addToBot((AbstractGameAction)new ReducePowerAction((AbstractCreature)p, (AbstractCreature)p, ArmyPaeonPower.POWER_ID, 1));
         }
+        //增加能力层数
+        addToBot((AbstractGameAction)new ApplyPowerAction((AbstractCreature)p, (AbstractCreature)p, (AbstractPower)new MageBalladPower((AbstractCreature)p, 1)));
+        //减少能力层数
+//        addToBot((AbstractGameAction)new ReducePowerAction((AbstractCreature)p, (AbstractCreature)p, MagiamObruorPower.POWER_ID, this.secondaryM));
+
+    }
+
+    @Override
+    public void limitedUpgrade() {
+        super.limitedUpgrade();
+        this.upgradeDamage(UPGRADE_NUMERICAL);
     }
 
 }

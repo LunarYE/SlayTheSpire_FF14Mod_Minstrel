@@ -21,9 +21,13 @@ import pathes.AbstractCardEnum;
 
 public class Venomous extends AbstractExampleCard {
     /**
+     * 获取类名
+     */
+    public static final String CLASS_NAME = Venomous.class.getSimpleName();
+    /**
      * 获取类名作为卡牌id
      */
-    public static final String ID = ModHelper.MakePath(Venomous.class.getSimpleName());
+    public static final String ID = ModHelper.MakePath(CLASS_NAME);
     /**
      * 卡牌贴图路径
      */
