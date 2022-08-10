@@ -1,33 +1,27 @@
 package cards.minstrel;
 
-import actions.MakeLoadedCardAction;
 import actions.SelectCardToHandAction;
-import actions.XActionAction;
 import cards.AbstractExampleCard;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
+import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.actions.common.DamageAllEnemiesAction;
-import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
-import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.powers.AbstractPower;
 import helpers.ModHelper;
 import pathes.AbstractCardEnum;
 
 import java.util.ArrayList;
-import java.util.function.Consumer;
 
-public class DeathRain extends AbstractExampleCard {
+public class Hemorrhage extends AbstractExampleCard {
     /**
-     * 获取类名 死亡箭雨
+     * 获取类名 失血箭
      */
-    public static final String CLASS_NAME = DeathRain.class.getSimpleName();
+    public static final String CLASS_NAME = Hemorrhage.class.getSimpleName();
     /**
      * 获取类名作为卡牌id
      */
@@ -63,21 +57,21 @@ public class DeathRain extends AbstractExampleCard {
     /**
      * 定义卡牌类型
      */
-    private static final AbstractCard.CardType TYPE = AbstractCard.CardType.ATTACK;
+    private static final CardType TYPE = CardType.ATTACK;
     /**
      * 定义卡牌颜色
      */
-    private static final AbstractCard.CardColor COLOR = AbstractCardEnum.MINSTREL_COLOR;
+    private static final CardColor COLOR = AbstractCardEnum.MINSTREL_COLOR;
     /**
      * 定义卡牌稀有度
      */
-    private static final AbstractCard.CardRarity RARITY = AbstractCard.CardRarity.SPECIAL;
+    private static final CardRarity RARITY = CardRarity.SPECIAL;
     /**
      * 定义卡牌指向对象
      */
-    private static final AbstractCard.CardTarget TARGET = CardTarget.ALL_ENEMY;
+    private static final CardTarget TARGET = CardTarget.ENEMY;
 
-    public DeathRain() {
+    public Hemorrhage() {
         super(ID, NAME, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
         //消耗
         this.exhaust = true;
@@ -86,10 +80,12 @@ public class DeathRain extends AbstractExampleCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
+        AbstractDungeon.actionManager.addToBottom(
+                new DamageAction(m, new DamageInfo(p, this.damage, this.damageTypeForTurn), AbstractGameAction.AttackEffect.SLASH_HORIZONTAL));
 //        damageToEnemy(m, AbstractGameAction.AttackEffect.SLASH_HORIZONTAL);
-        AbstractDungeon.actionManager.addToBottom
-                (new DamageAllEnemiesAction
-                        (p, this.multiDamage, DamageInfo.DamageType.NORMAL, AbstractGameAction.AttackEffect.SLASH_HEAVY));
+//        AbstractDungeon.actionManager.addToBottom
+//                (new DamageAllEnemiesAction
+//                        (p, this.multiDamage, DamageInfo.DamageType.NORMAL, AbstractGameAction.AttackEffect.SLASH_HEAVY));
 //        this.addToBot(new MakeLoadedCardAction(this.upgraded, new DeathRain(), this.magicNumber)); //加入到抽牌堆
 //        Consumer<Integer> actionConsumer = effect -> {
 //            DeathRain bombardaMagica = new DeathRain();
@@ -100,7 +96,7 @@ public class DeathRain extends AbstractExampleCard {
 //        };
 //        addToBot(new MakeTempCardInHandAction(new DeathRain(), 1)); //加入到手牌
 //        addToBot((AbstractGameAction)new XActionAction(actionConsumer, this.freeToPlayOnce, this.energyOnUse));
-        addToBot((AbstractGameAction) new SelectCardToHandAction(returnRandomCardByCardTagInCombat(), true, true));
+//        addToBot((AbstractGameAction) new SelectCardToHandAction(returnRandomCardByCardTagInCombat(), true, true));
 
     }
 
@@ -112,7 +108,7 @@ public class DeathRain extends AbstractExampleCard {
 
     public static ArrayList<AbstractCard> returnRandomCardByCardTagInCombat() {
         ArrayList<AbstractCard> returnCard = new ArrayList<>();
-        returnCard.add(new DeathRain());
+        returnCard.add(new Hemorrhage());
         returnCard.add(new Quick());
 //        for (AbstractCard c : AbstractDungeon.srcCommonCardPool.group) {
 //            if (c.hasTag(tag) && !c.hasTag(AbstractCard.CardTags.HEALING)) {

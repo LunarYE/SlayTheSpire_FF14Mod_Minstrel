@@ -21,7 +21,7 @@
   },
   "Minstrel:DeathRain": {
     "NAME": "死亡箭雨",
-    "DESCRIPTION": "造成 !D! 点伤害,并有30%概率生成并从死亡箭雨和失血箭中选一张 NL 消耗"
+    "DESCRIPTION": "对全体敌人造成 !D! 点伤害"
   },
   "Minstrel:Venomous": {
     "NAME": "毒咬箭",
@@ -42,5 +42,9 @@
   "Minstrel:PerfectPitch": {
     "NAME": "完美音调",
     "DESCRIPTION": "造成 #b诗心 层数*5的伤害( !D! 点伤害) NL 消耗，虚无"
+  },
+  "Minstrel:Hemorrhage": {
+    "NAME": "失血箭",
+    "DESCRIPTION": "对敌人造成 !D! 点伤害"
   }
 }

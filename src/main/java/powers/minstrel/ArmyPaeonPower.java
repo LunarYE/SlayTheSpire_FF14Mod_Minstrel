@@ -35,16 +35,25 @@ public class ArmyPaeonPower extends AbstractMinstrelPower {
     }
 
 
+    /**
+     * 获得能力的时候
+     * @param power
+     */
     @Override
     public void onStackPower(AbstractPower power) {
+        //如果获得能力是诗心
         if (power.ID.equals(PoetSoulPower.POWER_ID)) {
             flash();
+            //更新描述
             AbstractPower poetSoulPower = AbstractDungeon.player.getPower(PoetSoulPower.POWER_ID);
             poetSoulAmount = poetSoulPower.amount;
             updateDescription();
         }
     }
 
+    /**
+     * 每回合开始前
+     */
     @Override
     public void atStartOfTurn() {
         try {
@@ -52,6 +61,7 @@ public class ArmyPaeonPower extends AbstractMinstrelPower {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        //抽取诗心层数的卡牌到手牌
         AbstractPower poetSoulPower = AbstractDungeon.player.getPower(PoetSoulPower.POWER_ID);
         if (poetSoulPower != null && poetSoulPower.amount != 0) {
             poetSoulAmount = poetSoulPower.amount;

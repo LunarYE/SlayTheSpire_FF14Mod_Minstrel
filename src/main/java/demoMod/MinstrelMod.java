@@ -99,6 +99,7 @@ public class MinstrelMod implements PostInitializeSubscriber, EditCharactersSubs
         cards.add(new MageBallad());
         cards.add(new PerfectPitch());
         cards.add(new WandererMinuet());
+        cards.add(new Hemorrhage());
 //        cards.add(new Windbite());
         cards.add(new sing());
 
@@ -198,7 +199,7 @@ public class MinstrelMod implements PostInitializeSubscriber, EditCharactersSubs
         String path = "localization/" + language.toString().toLowerCase() + "/";
         Gson gson = new Gson();
 
-        String json = Gdx.files.internal(path + "KeywordStrings.json").readString(String.valueOf(StandardCharsets.UTF_8));
+        String json = Gdx.files.internal(path + "Minstrel_Keyword.json").readString(String.valueOf(StandardCharsets.UTF_8));
         com.evacipated.cardcrawl.mod.stslib.Keyword[] keywords = (com.evacipated.cardcrawl.mod.stslib.Keyword[]) gson.fromJson(json, com.evacipated.cardcrawl.mod.stslib.Keyword[].class);
         if (keywords != null) {
             for (com.evacipated.cardcrawl.mod.stslib.Keyword keyword : keywords) {
