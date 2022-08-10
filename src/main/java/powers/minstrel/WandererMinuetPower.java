@@ -1,11 +1,14 @@
 package powers.minstrel;
 
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
+import com.megacrit.cardcrawl.powers.PlatedArmorPower;
 import helpers.ModHelper;
 import powers.AbstractMinstrelPower;
 
@@ -25,9 +28,11 @@ public class WandererMinuetPower extends AbstractMinstrelPower {
     }
 
 
+
+
     @Override
     public void atStartOfTurn() {
-        AbstractPower poetSoulPower = AbstractDungeon.player.getPower("Minstrel:PoetSoulPower");
+        AbstractPower poetSoulPower = AbstractDungeon.player.getPower(PoetSoulPower.POWER_ID);
         if (poetSoulPower!=null) {
             addToTop(new DrawCardAction(poetSoulPower.amount));
         }

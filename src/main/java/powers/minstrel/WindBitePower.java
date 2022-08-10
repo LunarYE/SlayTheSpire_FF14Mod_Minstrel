@@ -12,6 +12,8 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 import helpers.ModHelper;
 import powers.AbstractMinstrelPower;
 
+import java.util.Random;
+
 public class WindBitePower extends AbstractMinstrelPower {
     public static final String POWER_ID = ModHelper.MakePath(WindBitePower.class.getSimpleName());
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
@@ -29,7 +31,11 @@ public class WindBitePower extends AbstractMinstrelPower {
 
     @Override
     public void atStartOfTurn() {
-        addToBot((AbstractGameAction)new StunMonsterAction((AbstractMonster) this.owner,AbstractDungeon.player,1));
+        Random random = new Random();
+        int n5 = random.nextInt(100);
+//        if (this.amount>=n5){
+            addToBot((AbstractGameAction)new StunMonsterAction((AbstractMonster) this.owner,AbstractDungeon.player,1));
+//        }
     }
 
     @Override

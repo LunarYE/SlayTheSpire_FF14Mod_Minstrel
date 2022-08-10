@@ -2,7 +2,7 @@
   "Minstrel:ArmyPaeonPower": {
     "NAME": "军神的赞美歌:",
     "DESCRIPTIONS": [
-      "每回合从抽牌堆中抽取 MinstrelMod:诗心 层数 ( #b%d ) 张卡"
+      "每回合从抽牌堆中抽取 #y诗心 层数 ( #b%d ) 张卡"
     ]
   },
   "Minstrel:PoetSoulPower": {
@@ -14,13 +14,13 @@
   "Minstrel:MageBalladPower": {
     "NAME": "贤者的叙事谣:",
     "DESCRIPTIONS": [
-      "每回合有 MinstrelMod:诗心 层数*10%的几率 选择一张失血箭或死亡箭雨加入手牌"
+      "每回合拥有 #y诗心 层数*10%%( #b%d %%)的几率选择一张失血箭或死亡箭雨加入手牌"
     ]
   },
   "Minstrel:WandererMinuetPower": {
     "NAME": "放浪神的小步舞曲:",
     "DESCRIPTIONS": [
-      "每回合将一张 #b完美音调 加入手牌"
+      "拥有诗心时每回合将一张 #y完美音调 加入手牌"
     ]
   }
 }

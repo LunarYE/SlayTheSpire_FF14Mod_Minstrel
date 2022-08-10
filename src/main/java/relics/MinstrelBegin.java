@@ -60,12 +60,18 @@ public class MinstrelBegin extends CustomRelic {
     }
     @Override
     public void atTurnStart() {
-        Random random = new Random();
-        int n5 = random.nextInt(100);
+        AbstractPower poetSoulPower = AbstractDungeon.player.getPower(PoetSoulPower.POWER_ID);
+        if (poetSoulPower == null){
+            addToBot((AbstractGameAction)new ApplyPowerAction((AbstractCreature)AbstractDungeon.player, (AbstractCreature)AbstractDungeon.player,
+                    (AbstractPower)new PoetSoulPower((AbstractCreature)AbstractDungeon.player, 1)));
+        } else if (poetSoulPower.amount < 4) {
+            Random random = new Random();
+            int n5 = random.nextInt(100);
 //        if (n5<=30){
             addToBot((AbstractGameAction)new ApplyPowerAction((AbstractCreature)AbstractDungeon.player, (AbstractCreature)AbstractDungeon.player,
                     (AbstractPower)new PoetSoulPower((AbstractCreature)AbstractDungeon.player, 1)));
 //        }
+        }
     }
 
 //    @Override

@@ -25,6 +25,6 @@ public class PoetSoulPower extends AbstractMinstrelPower {
 
     @Override
     public void updateDescription() {
-        this.description = String.format(DESCRIPTIONS[0], this.amount);
+        this.description = DESCRIPTIONS[0];
     }
 }

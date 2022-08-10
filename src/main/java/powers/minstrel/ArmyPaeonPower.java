@@ -18,28 +18,52 @@ public class ArmyPaeonPower extends AbstractMinstrelPower {
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
 
+
+    public int poetSoulAmount = 0;
+
     public ArmyPaeonPower(AbstractCreature owner, int amount) {
         this.name = NAME;
         this.ID = POWER_ID;
         this.owner = owner;
         this.amount = amount;
         loadRegion("rupture");
+        AbstractPower poetSoulPower = AbstractDungeon.player.getPower(PoetSoulPower.POWER_ID);
+        if (poetSoulPower != null && poetSoulPower.amount != 0) {
+            poetSoulAmount = poetSoulPower.amount;
+        }
         updateDescription();
     }
 
 
     @Override
-    public void atStartOfTurn() {
-        AbstractPower poetSoulPower = AbstractDungeon.player.getPower("Minstrel:PoetSoulPower");
-        if (poetSoulPower!=null) {
-            addToTop(new DrawCardAction(poetSoulPower.amount));
+    public void onStackPower(AbstractPower power) {
+        if (power.ID.equals(PoetSoulPower.POWER_ID)) {
+            flash();
+            AbstractPower poetSoulPower = AbstractDungeon.player.getPower(PoetSoulPower.POWER_ID);
+            poetSoulAmount = poetSoulPower.amount;
+            updateDescription();
         }
     }
 
+    @Override
+    public void atStartOfTurn() {
+        try {
+            wait(1);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        AbstractPower poetSoulPower = AbstractDungeon.player.getPower(PoetSoulPower.POWER_ID);
+        if (poetSoulPower != null && poetSoulPower.amount != 0) {
+            poetSoulAmount = poetSoulPower.amount;
+            addToTop(new DrawCardAction(poetSoulAmount));
+        }
+        updateDescription();
+    }
 
 
     @Override
     public void updateDescription() {
-        this.description = DESCRIPTIONS[0];
+        this.description = String.format(DESCRIPTIONS[0], new Object[]{Integer.valueOf(poetSoulAmount)});
+//        this.description = DESCRIPTIONS[0];
     }
 }

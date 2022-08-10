@@ -26,26 +26,49 @@ public class MageBalladPower extends AbstractMinstrelPower {
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
 
+    public int probability = 0;
+
     public MageBalladPower(AbstractCreature owner, int amount) {
         this.name = NAME;
         this.ID = POWER_ID;
         this.owner = owner;
         this.amount = amount;
         loadRegion("rupture");
+        AbstractPower poetSoulPower = AbstractDungeon.player.getPower(PoetSoulPower.POWER_ID);
+        if (poetSoulPower != null && poetSoulPower.amount != 0) {
+            probability = poetSoulPower.amount * 10;
+        }
         updateDescription();
+    }
+
+    @Override
+    public void onStackPower(AbstractPower power) {
+        if (power.ID.equals(PoetSoulPower.POWER_ID)) {
+            flash();
+            AbstractPower poetSoulPower = AbstractDungeon.player.getPower(PoetSoulPower.POWER_ID);
+            probability = poetSoulPower.amount * 10;
+            updateDescription();
+        }
     }
 
 
     @Override
     public void atStartOfTurn() {
-        AbstractPower poetSoulPower = AbstractDungeon.player.getPower("Minstrel:PoetSoulPower");
-        if (poetSoulPower!=null) {
+        try {
+            wait(1);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        AbstractPower poetSoulPower = AbstractDungeon.player.getPower(PoetSoulPower.POWER_ID);
+        if (poetSoulPower != null) {
             Random random = new Random();
             int n5 = random.nextInt(100);
-            if (n5<=poetSoulPower.amount*10){
+            probability = poetSoulPower.amount * 10;
+            if (n5 <= probability) {
                 addToBot((AbstractGameAction) new SelectCardToHandAction(returnRandomCardByCardTagInCombat(), true, true));
             }
         }
+        updateDescription();
     }
 
     public static ArrayList<AbstractCard> returnRandomCardByCardTagInCombat() {
@@ -58,6 +81,7 @@ public class MageBalladPower extends AbstractMinstrelPower {
 
     @Override
     public void updateDescription() {
-        this.description = DESCRIPTIONS[0];
+        this.description = String.format(DESCRIPTIONS[0], new Object[]{Integer.valueOf(this.probability)});
+//        this.description = DESCRIPTIONS[0];
     }
 }
