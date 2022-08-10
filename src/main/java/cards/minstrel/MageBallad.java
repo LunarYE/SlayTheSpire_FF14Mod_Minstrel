@@ -17,7 +17,7 @@ import powers.minstrel.MageBalladPower;
 
 public class MageBallad extends AbstractExampleCard {
     /**
-     * 获取类名
+     * 获取类名 贤者的叙事谣
      */
     public static final String CLASS_NAME = MageBallad.class.getSimpleName();
     /**

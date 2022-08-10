@@ -16,7 +16,7 @@ import powers.minstrel.WandererMinuetPower;
 
 public class WandererMinuet extends AbstractExampleCard {
     /**
-     * 获取类名
+     * 获取类名 放浪神的小步舞曲
      */
     public static final String CLASS_NAME = WandererMinuet.class.getSimpleName();
     /**

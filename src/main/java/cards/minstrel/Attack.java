@@ -16,7 +16,7 @@ import pathes.AbstractCardEnum;
 
 public class Attack extends AbstractExampleCard {
     /**
-     * 获取类名
+     * 获取类名 强力射击
      */
     public static final String CLASS_NAME = Attack.class.getSimpleName();
     /**

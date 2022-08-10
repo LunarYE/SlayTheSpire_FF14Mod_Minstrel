@@ -39,6 +39,11 @@ public class WindBitePower extends AbstractMinstrelPower {
     }
 
     @Override
+    public void atEndOfTurn(boolean isPlayer) {
+        
+    }
+
+    @Override
     public void updateDescription() {
         this.description = String.format(DESCRIPTIONS[0], this.amount);
     }

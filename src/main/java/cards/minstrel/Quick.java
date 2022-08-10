@@ -16,7 +16,7 @@ import pathes.AbstractCardEnum;
 
 public class Quick extends AbstractExampleCard {
     /**
-     * 获取类名
+     * 获取类名 连珠箭
      */
     public static final String CLASS_NAME = Quick.class.getSimpleName();
     /**

@@ -24,7 +24,7 @@ import java.util.ArrayList;
 
 public class ArmyPaeon extends AbstractExampleCard {
     /**
-     * 获取类名
+     * 获取类名 军神的赞美歌
      */
     public static final String CLASS_NAME = ArmyPaeon.class.getSimpleName();
     /**

@@ -16,7 +16,7 @@ import pathes.AbstractCardEnum;
 
 public class ShadowBite  extends AbstractExampleCard {
     /**
-     * 获取类名
+     * 获取类名 影逝箭
      */
     public static final String CLASS_NAME = ShadowBite.class.getSimpleName();
     /**

@@ -25,7 +25,7 @@ import java.util.function.Consumer;
 
 public class DeathRain extends AbstractExampleCard {
     /**
-     * 获取类名
+     * 获取类名 死亡箭雨
      */
     public static final String CLASS_NAME = DeathRain.class.getSimpleName();
     /**

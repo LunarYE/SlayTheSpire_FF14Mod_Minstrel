@@ -19,7 +19,7 @@ import powers.minstrel.PoetSoulPower;
 
 public class sing extends AbstractExampleCard {
     /**
-     * 获取类名
+     * 获取类名 吟唱
      */
     public static final String CLASS_NAME = sing.class.getSimpleName();
     /**

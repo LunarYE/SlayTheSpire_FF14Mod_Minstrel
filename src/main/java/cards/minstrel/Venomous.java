@@ -21,7 +21,7 @@ import pathes.AbstractCardEnum;
 
 public class Venomous extends AbstractExampleCard {
     /**
-     * 获取类名
+     * 获取类名 毒咬箭
      */
     public static final String CLASS_NAME = Venomous.class.getSimpleName();
     /**

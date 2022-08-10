@@ -20,7 +20,7 @@ import powers.minstrel.PoetSoulPower;
 
 public class PerfectPitch extends AbstractExampleCard {
     /**
-     * 获取类名
+     * 获取类名 完美音调
      */
     public static final String CLASS_NAME = PerfectPitch.class.getSimpleName();
     /**

@@ -12,7 +12,7 @@ import pathes.AbstractCardEnum;
 
 public class Windbite extends AbstractExampleCard {
     /**
-     * 获取类名
+     * 获取类名 风蚀箭(已删除）
      */
     public static final String CLASS_NAME = Windbite.class.getSimpleName();
     /**

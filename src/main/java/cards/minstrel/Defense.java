@@ -14,7 +14,7 @@ import pathes.AbstractCardEnum;
 
 public class Defense extends AbstractExampleCard {
     /**
-     * 获取类名
+     * 获取类名 闪避
      */
     public static final String CLASS_NAME = Defense.class.getSimpleName();
     /**

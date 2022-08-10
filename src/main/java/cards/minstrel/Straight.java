@@ -13,7 +13,7 @@ import pathes.AbstractCardEnum;
 
 public class Straight extends AbstractExampleCard {
     /**
-     * 获取类名
+     * 获取类名 直线射击
      */
     public static final String CLASS_NAME = Straight.class.getSimpleName();
     /**
