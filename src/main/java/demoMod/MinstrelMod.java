@@ -73,7 +73,7 @@ public class MinstrelMod implements PostInitializeSubscriber, EditCharactersSubs
     public void receiveEditCharacters() {
         //添加角色到MOD中
 //        BaseMod.addCharacter((AbstractPlayer) new Minstrel("Minstrel"), MY_CHARACTER_BUTTON, MARISA_PORTRAIT, ThmodClassEnum.MINSTREL_CLASS);
-        BaseMod.addCharacter(new Minstrel(Minstrel.charStrings.NAMES[1],AbstractPlayerEnum.MINSTREL),
+        BaseMod.addCharacter(new Minstrel(Minstrel.charStrings.NAMES[1], AbstractPlayerEnum.MINSTREL),
                 MY_CHARACTER_BUTTON,
                 MARISA_PORTRAIT, AbstractPlayerEnum.MINSTREL);
     }
@@ -99,6 +99,8 @@ public class MinstrelMod implements PostInitializeSubscriber, EditCharactersSubs
         cards.add(new MageBallad());
         cards.add(new PerfectPitch());
         cards.add(new WandererMinuet());
+        cards.add(new Windbite());
+        cards.add(new sing());
 
         cards.add(new Attack());
         cards.add(new Defense());
@@ -142,7 +144,6 @@ public class MinstrelMod implements PostInitializeSubscriber, EditCharactersSubs
     }
 
 
-
     public void receivePowersModified() {
     }
 
@@ -150,7 +151,6 @@ public class MinstrelMod implements PostInitializeSubscriber, EditCharactersSubs
     @Override
     public void receivePostDungeonInitialize() {
     }
-
 
 
     public void receivePostDraw(AbstractCard arg0) {
@@ -166,7 +166,7 @@ public class MinstrelMod implements PostInitializeSubscriber, EditCharactersSubs
 //        Gson gson = new Gson();
         Settings.GameLanguage language = languageSupport();
 //        loadLocKeywords(Settings.GameLanguage.ENG);
-        if (!language.equals(Settings.GameLanguage.ENG)){
+        if (!language.equals(Settings.GameLanguage.ENG)) {
             loadLocKeywords(language);
         }
 
@@ -199,7 +199,7 @@ public class MinstrelMod implements PostInitializeSubscriber, EditCharactersSubs
         Gson gson = new Gson();
 
         String json = Gdx.files.internal(path + "KeywordStrings.json").readString(String.valueOf(StandardCharsets.UTF_8));
-        com.evacipated.cardcrawl.mod.stslib.Keyword[] keywords = (com.evacipated.cardcrawl.mod.stslib.Keyword[])gson.fromJson(json, com.evacipated.cardcrawl.mod.stslib.Keyword[].class);
+        com.evacipated.cardcrawl.mod.stslib.Keyword[] keywords = (com.evacipated.cardcrawl.mod.stslib.Keyword[]) gson.fromJson(json, com.evacipated.cardcrawl.mod.stslib.Keyword[].class);
         if (keywords != null) {
             for (com.evacipated.cardcrawl.mod.stslib.Keyword keyword : keywords) {
                 BaseMod.addKeyword("MinstrelMod", keyword.PROPER_NAME, keyword.NAMES, keyword.DESCRIPTION);

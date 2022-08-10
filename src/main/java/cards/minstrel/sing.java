@@ -2,10 +2,9 @@ package cards.minstrel;
 
 import cards.AbstractExampleCard;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.actions.common.DamageAction;
-import com.megacrit.cardcrawl.actions.common.DrawCardAction;
-import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
-import com.megacrit.cardcrawl.cards.DamageInfo;
+import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
+import com.megacrit.cardcrawl.actions.common.GainBlockAction;
+import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -15,14 +14,14 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import helpers.ModHelper;
 import pathes.AbstractCardEnum;
+import powers.minstrel.ArmyPaeonPower;
 import powers.minstrel.PoetSoulPower;
 
-
-public class PerfectPitch extends AbstractExampleCard {
+public class sing extends AbstractExampleCard {
     /**
      * 获取类名
      */
-    public static final String CLASS_NAME = PerfectPitch.class.getSimpleName();
+    public static final String CLASS_NAME = sing.class.getSimpleName();
     /**
      * 获取类名作为卡牌id
      */
@@ -38,7 +37,7 @@ public class PerfectPitch extends AbstractExampleCard {
     /**
      * 卡牌基础数值
      */
-    private static final int NUMERICAL = 5;
+    private static final int NUMERICAL = 0;
     /**
      * 升级后提高的数值
      */
@@ -58,7 +57,7 @@ public class PerfectPitch extends AbstractExampleCard {
     /**
      * 定义卡牌类型
      */
-    private static final CardType TYPE = CardType.ATTACK;
+    private static final CardType TYPE = CardType.SKILL;
     /**
      * 定义卡牌颜色
      */
@@ -66,48 +65,48 @@ public class PerfectPitch extends AbstractExampleCard {
     /**
      * 定义卡牌稀有度
      */
-    private static final CardRarity RARITY = CardRarity.SPECIAL;
+    private static final CardRarity RARITY = CardRarity.COMMON;
     /**
      * 定义卡牌指向对象
      */
-    private static final CardTarget TARGET = CardTarget.ENEMY;
+    private static final CardTarget TARGET = CardTarget.SELF;
 
-    public PerfectPitch() {
+
+    public sing() {
+        //调用父类的构造方法，传参为super(卡牌ID,卡牌名称，能量花费，卡牌描述，卡牌类型，卡牌颜色，卡牌稀有度，卡牌目标)
         super(ID, NAME, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
-        //消耗
-        this.exhaust = true;
-        this.isEthereal = true;
-        this.baseDamage = NUMERICAL;
+        //添加基础防御标签和将格挡设为5
+        this.tags.add(CardTags.STARTER_DEFEND);
+    }
+
+    @Override
+    public boolean canUse(AbstractPlayer p, AbstractMonster m) {
+        AbstractPower poetSoulPower = AbstractDungeon.player.getPower(PoetSoulPower.POWER_ID);
+        if (poetSoulPower.amount < 4) {
+            return super.canUse(p, m);
+        }
+        return false;
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        AbstractPower poetSoulPower = AbstractDungeon.player.getPower(PoetSoulPower.POWER_ID);
-        if (poetSoulPower!=null) {
-            addToBot((AbstractGameAction) new DamageAction((AbstractCreature) m, new DamageInfo((AbstractCreature) p, this.damage*poetSoulPower.amount, this.damageTypeForTurn), AbstractGameAction.AttackEffect.LIGHTNING));
-            addToBot((AbstractGameAction)new RemoveSpecificPowerAction((AbstractCreature)p, (AbstractCreature)p, PoetSoulPower.POWER_ID));
-        }
-
-//        addToBot((AbstractGameAction) new LoseCorGladiiAction(true));
-//        damageToEnemy(m, AbstractGameAction.AttackEffect.SLASH_HORIZONTAL);
+        //使用卡牌时触发的动作
+        addToBot((AbstractGameAction) new ApplyPowerAction((AbstractCreature) p, (AbstractCreature) p, (AbstractPower) new PoetSoulPower((AbstractCreature) p, 1)));
     }
 
     @Override
-    public void calculateCardDamage(AbstractMonster mo) {
-        int trueDamage = this.baseDamage;
-
-        this.baseDamage = 1;
-        if (AbstractDungeon.player.hasPower(PoetSoulPower.POWER_ID)) {
-            this.baseDamage += (AbstractDungeon.player.getPower(PoetSoulPower.POWER_ID)).amount*5;
-        }
-        super.calculateCardDamage(mo);
-
-        this.baseDamage = trueDamage;
+    public AbstractCard makeCopy() {
+        //复制卡牌时触发
+        return new sing();
     }
 
     @Override
-    public void limitedUpgrade() {
-        super.limitedUpgrade();
-        this.upgradeDamage(UPGRADE_NUMERICAL);
+    public void upgrade() {
+        //卡牌升级后的效果
+        if (!this.upgraded) {
+            //更改名字和提高3点格挡
+            upgradeName();
+        }
     }
+
 }
