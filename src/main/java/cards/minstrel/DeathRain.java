@@ -100,7 +100,7 @@ public class DeathRain extends AbstractExampleCard {
 //        };
 //        addToBot(new MakeTempCardInHandAction(new DeathRain(), 1)); //加入到手牌
 //        addToBot((AbstractGameAction)new XActionAction(actionConsumer, this.freeToPlayOnce, this.energyOnUse));
-        addToBot((AbstractGameAction) new SelectCardToHandAction(returnRandomCardByCardTagInCombat(), true, true));
+//        addToBot((AbstractGameAction) new SelectCardToHandAction(returnRandomCardByCardTagInCombat(), true, true));
 
     }
 

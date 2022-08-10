@@ -12,16 +12,16 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
+import com.megacrit.cardcrawl.powers.EquilibriumPower;
 import helpers.ModHelper;
 import pathes.AbstractCardEnum;
-import powers.minstrel.ArmyPaeonPower;
-import powers.minstrel.PoetSoulPower;
+import powers.TwoAttackPower;
 
-public class sing extends AbstractExampleCard {
+public class Barrage extends AbstractExampleCard {
     /**
-     * 获取类名 吟唱
+     * 获取类名 纷乱箭
      */
-    public static final String CLASS_NAME = sing.class.getSimpleName();
+    public static final String CLASS_NAME = Barrage.class.getSimpleName();
     /**
      * 获取类名作为卡牌id
      */
@@ -37,11 +37,11 @@ public class sing extends AbstractExampleCard {
     /**
      * 卡牌基础数值
      */
-    private static final int NUMERICAL = 0;
+    private static final int NUMERICAL = 5;
     /**
      * 升级后提高的数值
      */
-    private static final int UPGRADE_NUMERICAL = 0;
+    private static final int UPGRADE_NUMERICAL = 5;
     /**
      * 从.json文件中提取键名为卡牌id的信息
      */
@@ -65,39 +65,30 @@ public class sing extends AbstractExampleCard {
     /**
      * 定义卡牌稀有度
      */
-    private static final CardRarity RARITY = CardRarity.COMMON;
+    private static final CardRarity RARITY = CardRarity.UNCOMMON;
     /**
      * 定义卡牌指向对象
      */
     private static final CardTarget TARGET = CardTarget.SELF;
 
 
-    public sing() {
+    public Barrage() {
         //调用父类的构造方法，传参为super(卡牌ID,卡牌名称，能量花费，卡牌描述，卡牌类型，卡牌颜色，卡牌稀有度，卡牌目标)
         super(ID, NAME, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
-        //添加基础防御标签和将格挡设为5
-        this.tags.add(CardTags.STARTER_DEFEND);
-    }
-
-    @Override
-    public boolean canUse(AbstractPlayer p, AbstractMonster m) {
-        AbstractPower poetSoulPower = AbstractDungeon.player.getPower(PoetSoulPower.POWER_ID);
-        if (poetSoulPower == null || poetSoulPower.amount < 4) {
-            return super.canUse(p, m);
-        }
-        return false;
+        this.baseBlock = NUMERICAL;
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        //使用卡牌时触发的动作
-        addToBot((AbstractGameAction) new ApplyPowerAction((AbstractCreature) p, (AbstractCreature) p, (AbstractPower) new PoetSoulPower((AbstractCreature) p, 1)));
+        //下张攻击牌重复释放3次
+        addToBot((AbstractGameAction)new ApplyPowerAction((AbstractCreature)p, (AbstractCreature)p, (AbstractPower)new TwoAttackPower((AbstractCreature)p, 1,3)));
     }
 
     @Override
     public AbstractCard makeCopy() {
         //复制卡牌时触发
-        return new sing();
+        return new Barrage();
+
     }
 
     @Override
@@ -106,6 +97,8 @@ public class sing extends AbstractExampleCard {
         if (!this.upgraded) {
             //更改名字和提高3点格挡
             upgradeName();
+//            upgradeMagicNumber(2);
+            upgradeBlock(UPGRADE_NUMERICAL);
         }
     }
 

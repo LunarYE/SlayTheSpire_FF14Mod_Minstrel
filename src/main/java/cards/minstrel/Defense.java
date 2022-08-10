@@ -72,7 +72,7 @@ public class Defense extends AbstractExampleCard {
         super(ID, NAME, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
         //添加基础防御标签和将格挡设为5
         this.tags.add(CardTags.STARTER_DEFEND);
-        this.block = NUMERICAL;
+        this.baseBlock = NUMERICAL;
     }
 
     @Override

@@ -22,5 +22,11 @@
     "DESCRIPTIONS": [
       "拥有诗心时每回合将一张 #y完美音调 加入手牌"
     ]
+  },
+  "Minstrel:TwoAttackPower": {
+    "NAME": "纷乱箭:",
+    "DESCRIPTIONS": [
+      "下一张攻击牌打出 #b%d 次"
+    ]
   }
 }

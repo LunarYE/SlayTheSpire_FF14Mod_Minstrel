@@ -3,25 +3,23 @@ package cards.minstrel;
 import cards.AbstractExampleCard;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
-import com.megacrit.cardcrawl.actions.common.GainBlockAction;
+import com.megacrit.cardcrawl.actions.common.HealAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
+import com.megacrit.cardcrawl.powers.DexterityPower;
 import helpers.ModHelper;
 import pathes.AbstractCardEnum;
-import powers.minstrel.ArmyPaeonPower;
-import powers.minstrel.PoetSoulPower;
 
-public class sing extends AbstractExampleCard {
+public class Peloton extends AbstractExampleCard {
     /**
-     * 获取类名 吟唱
+     * 获取类名 内丹
      */
-    public static final String CLASS_NAME = sing.class.getSimpleName();
+    public static final String CLASS_NAME = Peloton.class.getSimpleName();
     /**
      * 获取类名作为卡牌id
      */
@@ -37,11 +35,11 @@ public class sing extends AbstractExampleCard {
     /**
      * 卡牌基础数值
      */
-    private static final int NUMERICAL = 0;
+    private static final int NUMERICAL = 5;
     /**
      * 升级后提高的数值
      */
-    private static final int UPGRADE_NUMERICAL = 0;
+    private static final int UPGRADE_NUMERICAL = 5;
     /**
      * 从.json文件中提取键名为卡牌id的信息
      */
@@ -72,32 +70,25 @@ public class sing extends AbstractExampleCard {
     private static final CardTarget TARGET = CardTarget.SELF;
 
 
-    public sing() {
+    public Peloton() {
         //调用父类的构造方法，传参为super(卡牌ID,卡牌名称，能量花费，卡牌描述，卡牌类型，卡牌颜色，卡牌稀有度，卡牌目标)
         super(ID, NAME, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
-        //添加基础防御标签和将格挡设为5
-        this.tags.add(CardTags.STARTER_DEFEND);
-    }
-
-    @Override
-    public boolean canUse(AbstractPlayer p, AbstractMonster m) {
-        AbstractPower poetSoulPower = AbstractDungeon.player.getPower(PoetSoulPower.POWER_ID);
-        if (poetSoulPower == null || poetSoulPower.amount < 4) {
-            return super.canUse(p, m);
-        }
-        return false;
+        this.baseBlock = NUMERICAL;
+        this.baseMagicNumber = 3;
+        this.exhaust = true;
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        //使用卡牌时触发的动作
-        addToBot((AbstractGameAction) new ApplyPowerAction((AbstractCreature) p, (AbstractCreature) p, (AbstractPower) new PoetSoulPower((AbstractCreature) p, 1)));
+        //给予3层敏捷
+        addToBot((AbstractGameAction)new ApplyPowerAction((AbstractCreature)p, (AbstractCreature)p, (AbstractPower)new DexterityPower((AbstractCreature)p, this.magicNumber)));
     }
 
     @Override
     public AbstractCard makeCopy() {
         //复制卡牌时触发
-        return new sing();
+        return new Peloton();
+
     }
 
     @Override
@@ -106,6 +97,8 @@ public class sing extends AbstractExampleCard {
         if (!this.upgraded) {
             //更改名字和提高3点格挡
             upgradeName();
+            upgradeMagicNumber(2);
+//            upgradeBlock(UPGRADE_NUMERICAL);
         }
     }
 

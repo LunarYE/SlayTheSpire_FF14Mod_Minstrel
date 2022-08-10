@@ -56,11 +56,6 @@ public class ArmyPaeonPower extends AbstractMinstrelPower {
      */
     @Override
     public void atStartOfTurn() {
-        try {
-            wait(1);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         //抽取诗心层数的卡牌到手牌
         AbstractPower poetSoulPower = AbstractDungeon.player.getPower(PoetSoulPower.POWER_ID);
         if (poetSoulPower != null && poetSoulPower.amount != 0) {

@@ -15,6 +15,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
+import powers.AbstractMinstrelPower;
 import powers.minstrel.ArmyPaeonPower;
 import powers.minstrel.PoetSoulPower;
 
@@ -58,23 +59,36 @@ public class MinstrelBegin extends CustomRelic {
         //3张演奏曲选择一张加入到手牌
         addToBot((AbstractGameAction) new SelectCardToHandAction(returnRandomCardByCardTagInCombat(), true, true));
     }
+//    @Override
+//    public void atTurnStart() {
+//        AbstractPower poetSoulPower = AbstractDungeon.player.getPower(PoetSoulPower.POWER_ID);
+//        if (poetSoulPower == null){
+//            addToBot((AbstractGameAction)new ApplyPowerAction((AbstractCreature)AbstractDungeon.player, (AbstractCreature)AbstractDungeon.player,
+//                    (AbstractPower)new PoetSoulPower((AbstractCreature)AbstractDungeon.player, 1)));
+//        } else if (poetSoulPower.amount < 4) {
+//            Random random = new Random();
+//            int n5 = random.nextInt(100);
+////        if (n5<=30){
+//            addToBot((AbstractGameAction)new ApplyPowerAction((AbstractCreature)AbstractDungeon.player, (AbstractCreature)AbstractDungeon.player,
+//                    (AbstractPower)new PoetSoulPower((AbstractCreature)AbstractDungeon.player, 1)));
+////        }
+//        }
+//    }
+
     @Override
-    public void atTurnStart() {
+    public void onPlayerEndTurn() {
         AbstractPower poetSoulPower = AbstractDungeon.player.getPower(PoetSoulPower.POWER_ID);
-        if (poetSoulPower == null){
-            addToBot((AbstractGameAction)new ApplyPowerAction((AbstractCreature)AbstractDungeon.player, (AbstractCreature)AbstractDungeon.player,
-                    (AbstractPower)new PoetSoulPower((AbstractCreature)AbstractDungeon.player, 1)));
-        } else if (poetSoulPower.amount < 4) {
+        if (poetSoulPower == null || poetSoulPower.amount < 4) {
             Random random = new Random();
             int n5 = random.nextInt(100);
-//        if (n5<=30){
-            addToBot((AbstractGameAction)new ApplyPowerAction((AbstractCreature)AbstractDungeon.player, (AbstractCreature)AbstractDungeon.player,
-                    (AbstractPower)new PoetSoulPower((AbstractCreature)AbstractDungeon.player, 1)));
+            //        if (n5<=30){
+            addToBot((AbstractGameAction) new ApplyPowerAction((AbstractCreature) AbstractDungeon.player, (AbstractCreature) AbstractDungeon.player,
+                    (AbstractPower) new PoetSoulPower((AbstractCreature) AbstractDungeon.player, 1)));
 //        }
         }
     }
 
-//    @Override
+    //    @Override
 //    public void onUseCard(AbstractCard card, UseCardAction action) {
 //        //在用户使用牌时触发
 //        if (card.type == AbstractCard.CardType.SKILL) {

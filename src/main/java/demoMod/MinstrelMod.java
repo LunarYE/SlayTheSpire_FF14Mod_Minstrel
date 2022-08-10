@@ -103,6 +103,10 @@ public class MinstrelMod implements PostInitializeSubscriber, EditCharactersSubs
         cards.add(new Chant());
 //        cards.add(new Windbite());
         cards.add(new sing());
+        cards.add(new Barrage());
+        cards.add(new SecondWind());
+        cards.add(new Peloton());
+
 
         cards.add(new Attack());
         cards.add(new Defense());

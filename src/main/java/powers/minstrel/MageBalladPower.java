@@ -26,7 +26,7 @@ public class MageBalladPower extends AbstractMinstrelPower {
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
 
-    public int probability = 0;
+    public int poetSoulAmount = 0;
 
     public MageBalladPower(AbstractCreature owner, int amount) {
         this.name = NAME;
@@ -36,7 +36,7 @@ public class MageBalladPower extends AbstractMinstrelPower {
         loadRegion("rupture");
         AbstractPower poetSoulPower = AbstractDungeon.player.getPower(PoetSoulPower.POWER_ID);
         if (poetSoulPower != null && poetSoulPower.amount != 0) {
-            probability = poetSoulPower.amount * 10;
+            poetSoulAmount = poetSoulPower.amount * 10;
         }
         updateDescription();
     }
@@ -46,29 +46,20 @@ public class MageBalladPower extends AbstractMinstrelPower {
         if (power.ID.equals(PoetSoulPower.POWER_ID)) {
             flash();
             AbstractPower poetSoulPower = AbstractDungeon.player.getPower(PoetSoulPower.POWER_ID);
-            probability = poetSoulPower.amount * 10;
+            poetSoulAmount = poetSoulPower.amount * 10;
             updateDescription();
         }
     }
 
 
+
     @Override
     public void atStartOfTurn() {
-        try {
-            wait(1);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        Random random = new Random();
+        int n5 = random.nextInt(100);
+        if (poetSoulAmount!=0 && n5 <= poetSoulAmount) {
+            addToBot((AbstractGameAction) new SelectCardToHandAction(returnRandomCardByCardTagInCombat(), true, true));
         }
-        AbstractPower poetSoulPower = AbstractDungeon.player.getPower(PoetSoulPower.POWER_ID);
-        if (poetSoulPower != null) {
-            Random random = new Random();
-            int n5 = random.nextInt(100);
-            probability = poetSoulPower.amount * 10;
-            if (n5 <= probability) {
-                addToBot((AbstractGameAction) new SelectCardToHandAction(returnRandomCardByCardTagInCombat(), true, true));
-            }
-        }
-        updateDescription();
     }
 
     public static ArrayList<AbstractCard> returnRandomCardByCardTagInCombat() {
@@ -81,7 +72,7 @@ public class MageBalladPower extends AbstractMinstrelPower {
 
     @Override
     public void updateDescription() {
-        this.description = String.format(DESCRIPTIONS[0], new Object[]{Integer.valueOf(this.probability)});
+        this.description = String.format(DESCRIPTIONS[0], new Object[]{Integer.valueOf(this.poetSoulAmount)});
 //        this.description = DESCRIPTIONS[0];
     }
 }
