@@ -1,0 +1,129 @@
+package cards.minstrel;
+
+import basemod.BaseMod;
+import cards.AbstractExampleCard;
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.animations.VFXAction;
+import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
+import com.megacrit.cardcrawl.actions.common.DamageAction;
+import com.megacrit.cardcrawl.actions.common.GainBlockAction;
+import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
+import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.cards.DamageInfo;
+import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.core.AbstractCreature;
+import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.core.Settings;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.localization.CardStrings;
+import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.powers.AbstractPower;
+import com.megacrit.cardcrawl.powers.VulnerablePower;
+import com.megacrit.cardcrawl.powers.WeakPower;
+import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
+import helpers.ModHelper;
+import pathes.AbstractCardEnum;
+
+public class RiskPerception extends AbstractExampleCard {
+    /**
+     * 获取类名 危险感知
+     */
+    public static final String CLASS_NAME = RiskPerception.class.getSimpleName();
+    /**
+     * 获取类名作为卡牌id
+     */
+    public static final String ID = ModHelper.MakePath(CLASS_NAME);
+    /**
+     * 卡牌贴图路径
+     */
+    private static final String IMG_PATH = "img/minstrel/cards/test.png";
+    /**
+     * 卡牌基础费用
+     */
+    private static final int COST = 2;
+    /**
+     * 卡牌基础数值
+     */
+    private static final int NUMERICAL = 15;
+    /**
+     * 升级后提高的数值
+     */
+    private static final int UPGRADE_NUMERICAL = 15;
+    /**
+     * 从.json文件中提取键名为卡牌id的信息
+     */
+    private static final CardStrings CARD_STRINGS = CardCrawlGame.languagePack.getCardStrings(ID);
+    /**
+     * 从.json文件中获取类名为键名的卡牌名称
+     */
+    private static final String NAME = CARD_STRINGS.NAME;
+    /**
+     * 从.json文件中获取类名为键名的卡牌效果
+     */
+    private static final String DESCRIPTION = CARD_STRINGS.DESCRIPTION;
+    /**
+     * 定义卡牌类型
+     */
+    private static final CardType TYPE = CardType.SKILL;
+    /**
+     * 定义卡牌颜色
+     */
+    private static final CardColor COLOR = AbstractCardEnum.MINSTREL_COLOR;
+    /**
+     * 定义卡牌稀有度
+     */
+    private static final CardRarity RARITY = CardRarity.COMMON;
+    /**
+     * 定义卡牌指向对象
+     */
+    private static final CardTarget TARGET = CardTarget.SELF_AND_ENEMY;
+
+
+    public RiskPerception() {
+        //调用父类的构造方法，传参为super(卡牌ID,卡牌名称，能量花费，卡牌描述，卡牌类型，卡牌颜色，卡牌稀有度，卡牌目标)
+        super(ID, NAME, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
+        this.exhaust = true;
+        this.baseBlock = NUMERICAL;
+    }
+
+    @Override
+    public boolean canUse(AbstractPlayer p, AbstractMonster m) {
+        if (m != null) {
+            if (m.getIntentBaseDmg() >= 0) {
+                return super.canUse(p, m);
+            }
+            if (this.timesUpgraded >= 2) {
+                return super.canUse(p, m);
+            }
+            this.cantUseMessage = "敌人的意图不是攻击";
+            return false;
+        }
+
+        return super.canUse(p, m);
+    }
+
+    @Override
+    public void use(AbstractPlayer p, AbstractMonster m) {
+        addToBot((AbstractGameAction)new ApplyPowerAction((AbstractCreature)m, (AbstractCreature)p, (AbstractPower)new VulnerablePower((AbstractCreature)m, 1, false)));
+//        AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, p, this.block));
+        addToBot((AbstractGameAction)new ApplyPowerAction((AbstractCreature)m, (AbstractCreature)p, (AbstractPower)new WeakPower((AbstractCreature)m, 1, false)));
+
+    }
+
+    @Override
+    public AbstractCard makeCopy() {
+        //复制卡牌时触发
+        return new RiskPerception();
+    }
+
+    @Override
+    public void upgrade() {
+        //卡牌升级后的效果
+        if (!this.upgraded) {
+            //更改名字和提高3点格挡
+            upgradeName();
+            upgradeBlock(UPGRADE_NUMERICAL);
+        }
+    }
+
+}

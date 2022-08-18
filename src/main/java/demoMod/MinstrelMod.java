@@ -101,6 +101,9 @@ public class MinstrelMod implements PostInitializeSubscriber, EditCharactersSubs
         cards.add(new WandererMinuet());
         cards.add(new Hemorrhage());
         cards.add(new Chant());
+        cards.add(new ArmsLength());
+        cards.add(new Tonality());
+        cards.add(new RiskPerception());
 //        cards.add(new Windbite());
         cards.add(new sing());
         cards.add(new Barrage());
@@ -205,7 +208,7 @@ public class MinstrelMod implements PostInitializeSubscriber, EditCharactersSubs
         Gson gson = new Gson();
 
         String json = Gdx.files.internal(path + "Minstrel_Keyword.json").readString(String.valueOf(StandardCharsets.UTF_8));
-        com.evacipated.cardcrawl.mod.stslib.Keyword[] keywords = (com.evacipated.cardcrawl.mod.stslib.Keyword[]) gson.fromJson(json, com.evacipated.cardcrawl.mod.stslib.Keyword[].class);
+        com.evacipated.cardcrawl.mod.stslib.Keyword[] keywords = gson.fromJson(json, com.evacipated.cardcrawl.mod.stslib.Keyword[].class);
         if (keywords != null) {
             for (com.evacipated.cardcrawl.mod.stslib.Keyword keyword : keywords) {
                 BaseMod.addKeyword("MinstrelMod", keyword.PROPER_NAME, keyword.NAMES, keyword.DESCRIPTION);
